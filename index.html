@@ -1,0 +1,64 @@
+<html>
+<head>
+ <link rel="stylesheet" href="style/engine_flow.css">
+</head>
+<body>
+<div id="sup-menu"></div>
+
+<div id="main-container">
+	
+	<canvas width="500px" height="500px" id="canv-flow"> </canvas>
+
+	<div id="block-scroll"> 
+	    <span id="name-block" > Name <span id="name-block"></span></span>
+		<div class="option">
+			<span>Command:</span>
+			<input id="command-block" />
+		</div>
+		
+		<button id="bt-updateblock">Updade Block</button>
+		<br>
+		<div id="line" ></div>
+		<br>
+		<div class="option">
+			<span>Add whith link:</span>
+			<select id="addlink-block" >
+				<option>Process</option>
+				<option>Decision</option>
+				<option>Input</option>
+				<option>Output</option>
+				<option>Loop (For)</option>
+				<option>Loop (While)</option>
+				<option>Loop (Do-While)</option>
+			</select>
+		</div>
+		<button id="bt-addlink">Add Link</button>
+		
+		<div class="option">
+			<span>Link to</span>
+			<select id="linkto-block">
+			</select>
+		</div>
+		
+		
+	</div>
+
+</div>
+<!--
+<div id="msg-alert">
+	Pressione <b>Ctrl</b> para mover o bloco
+</div>
+-->
+
+<script src="src/jquery-3.2.1.min.js"></script>
+<script src="src/RectRounded.js"></script>
+<script src="model/CButton.js"></script>
+<script src="model/StartEnd.js"></script>
+<script src="model/Process.js"></script>
+<script src="engine_flow.js"></script>
+<script src="translate_code.js"></script>
+<script src="main.js"></script>
+
+</body>
+
+</html>
