@@ -1,3 +1,7 @@
+COLOR = new Object();
+COLOR.line_block = "black";
+
+
 canvas = document.getElementById("canv-flow");
 ctx = canvas.getContext("2d");
 
@@ -5,17 +9,18 @@ ctx = canvas.getContext("2d");
 ef = new EngineFlow();
 ef.start();
 
-s = new StartEnd(120,10, ctx, "start");
+s = new StartEnd(120,10, ctx, "Start");
 p = new Process(100,100, ctx, "numero = 10");
 p2 = new Process(100,200, ctx, "numero = 10");
+
 ef.addBlock(p);
+ef.addBlock(p2);
 ef.addBlock(s);
-//ef.addBlock(p2);
+
 s.addLink(p);
-//p.addLink(p2);
-//ef.addBlock(new StartEnd(200,200, ctx, "start"));
+p.addLink(p2);
 
-
+console.log(p2.links);
 
 function getMousePos(canvas, evt) {
 	var rect = canvas.getBoundingClientRect();

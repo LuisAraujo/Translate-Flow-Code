@@ -50,9 +50,9 @@ EngineFlow.prototype.addBlock = function(block){
 EngineFlow.prototype.loop = function(_this){	
 	ctx.clearRect(0,0,500,500);
 
-	_this.stackBlock.forEach( function(block){
-		block.print();
-	});
+	for(i=0; i < _this.stackBlock.length; i++){
+		_this.stackBlock[i].print();
+	};
 	
 	window.requestAnimationFrame( function(){ _this.loop(_this)} );
 	
