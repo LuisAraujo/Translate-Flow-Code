@@ -9,18 +9,29 @@ ctx = canvas.getContext("2d");
 ef = new EngineFlow();
 ef.start();
 
-s = new StartEnd(120,10, ctx, "Start");
-p = new Process(100,100, ctx, "numero = 10");
-p2 = new Process(100,200, ctx, "numero = 10");
+s = new StartEnd(250,10, ctx, "Start");
+p = new Process(200,100, ctx, "numero = 10");
+d = new Decision(200,200, ctx, "numero%2 = 0");
+p2 = new Process(100,300, ctx, "numero2 = 100");
+p3 = new Process(300,300, ctx, "numero2 = 10");
+c = new Conection(270,400, ctx, "");
 
-ef.addBlock(p);
-ef.addBlock(p2);
 ef.addBlock(s);
+ef.addBlock(p);
+ef.addBlock(d);
+
+ef.addBlock(p2);
+ef.addBlock(p3);
+ef.addBlock(c);
 
 s.addLink(p);
-p.addLink(p2);
+p.addLink(d);
+d.linkyes = p2;
+d.linkno = p3;
 
-console.log(p2.links);
+p2.addLink(c);
+p3.addLink(c);
+
 
 function getMousePos(canvas, evt) {
 	var rect = canvas.getBoundingClientRect();

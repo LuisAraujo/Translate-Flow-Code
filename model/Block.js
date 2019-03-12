@@ -7,11 +7,13 @@ Block = function(x, y, ctx, command){
 	this.ctx.font = "15px Courier New";
 	this.h = 40;
 	this.m = 10;
-	this.text = command;
-	this.w = this.ctx.measureText(this.text).width;
+	this.command = command;
+	this.w = this.ctx.measureText(this.command).width;
 	this.selected = false;
 	this.moving = false;
 	this.links = [];
+	this.propText = 1;
+	this.type= "";
 	
 }
 
@@ -35,7 +37,7 @@ Block.prototype.printLinks = function(color){
 		this.ctx.strokeStyle = color == undefined?"#000":color;
 		this.ctx.beginPath();
 		this.ctx.moveTo(this.x + this.w/2 + this.m/2, this.y+this.h);
-		this.ctx.lineTo(this.links[i].x+this.links[i].w/2 + this.m/2, this.links[i].y);
+		this.ctx.lineTo(this.links[i].x + this.links[i].w/2 + this.m/2, this.links[i].y);
 		this.ctx.closePath();
 		this.ctx.stroke();
 	}
@@ -47,9 +49,7 @@ Block.prototype.printSelected = function(){
 	this.ctx.font = "15px Courier New";
 	this.ctx.lineWidth = "2";
 	this.printBlock();
-	this.ctx.textAlign = "center";
-	this.ctx.fillStyle = "#0056E0";
-	this.ctx.fillText(this.text, this.x + this.m + this.w/2  ,this.y + this.h/2);
+	this.printText();
 	this.printLinks();
 }
 
@@ -58,9 +58,7 @@ Block.prototype.printMoving = function(){
 	this.ctx.lineWidth = "2";
 	this.ctx.strokeStyle = "#aaa";
 	this.printBlock();
-	this.ctx.fillStyle = "#aaa";
-	this.ctx.textAlign = "center";
-	this.ctx.fillText(this.text, this.x + this.m + this.w/2  ,this.y + this.h/2);
+	this.printText();
 	this.ctx.setLineDash([4, 2]);
 	this.printLinks("#aa");
 	this.ctx.setLineDash([0, 0]);
@@ -92,15 +90,20 @@ Block.prototype.print = function(){
 }
 
 Block.prototype.updateCommand = function(command){
-	this.text = command;
+	this.command = command;
 	this.resizeBlock();
 }
 	
 Block.prototype.resizeBlock = function(){
-	this.w = this.ctx.measureText(this.text).width;
+	this.w = this.ctx.measureText(this.command).width * this.propText;
 }
 
 
 Block.prototype.addLink = function(idblock){
 	this.links.push(idblock);
+}
+
+
+Block.prototype.getType = function(){
+	return this.type;
 }

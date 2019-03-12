@@ -16,8 +16,8 @@ body{
 	left: calc( 50% - 300px);
 }
 #main-container{
-	width: 820px;
-	margin-left: calc(50% - 410px);
+	width: 100%;
+	/*margin-left: calc(50% - 410px);*/
 	height: 100%;
 }
 
@@ -30,7 +30,7 @@ body{
 
 #block-scroll{
 	font-family: Courier New;
-	height: 500px;
+	height: calc(100% - 80px);
 	width: 290px;
 	border-radius: 10px;
 	float: right;
@@ -63,6 +63,10 @@ body{
 	color: #fff;
 }
 
+#block-scroll button:hover{
+	cursor: pointer;
+	background-color: #33b2dd;
+}
 #block-scroll #line{
 	height: 1px;
 	width: 100%;
@@ -78,5 +82,28 @@ body{
 	border: 1px solid #888;
 	background-color: #fff;
 	float: right;
+	
 }
 
+
+#container-code{
+	width: 500px;
+	height: calc(100% - 80px);
+	margin-left: 20px;
+	margin-right: 20px;
+	border: 1px solid #888;
+	background-color: #fff;
+	float: right;
+	
+}
+
+
+#bt-geratecode{
+	background-color: #f40e3c !important;
+	height: 40px;
+	font-weight: bold;
+	font-size: 15px;
+}
+#bt-geratecode:hover{
+	background-color: #ef3258 !important;
+}

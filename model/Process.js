@@ -7,12 +7,12 @@ Process = function(x, y, ctx, command){
 	this.ctx.font = "15px Courier New";
 	this.h = 40;
 	this.m = 10;
-	this.text = command;
-	this.w = this.ctx.measureText(this.text).width;
+	this.command = command;
+	this.w = this.ctx.measureText(this.command).width;
 	this.selected = false;
 	this.moving = false;
 	this.links = [];
-	
+	this.type = "process";
 	
 }
 
@@ -28,5 +28,5 @@ Process.prototype.printBlock = function(){
 Process.prototype.printText = function(){
     this.ctx.fillStyle = "#0056E0";
 	ctx.textAlign = "center";
-	this.ctx.fillText(this.text, this.x + this.m + this.w/2  ,this.y + this.h/2);
+	this.ctx.fillText(this.command, this.x + this.m + this.w/2  ,this.y + this.h/2);
 }
