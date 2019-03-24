@@ -99,10 +99,10 @@ EngineFlow.prototype.getCommands = function(){
 				var command2 =  command.linkyes;
 				
 				while( (command2 != undefined) && ( command2 != null )){
-					
-					console.log(tempStackBlock);
+ 
 					textCommands += command2.getType()+":";
 					textCommands += command2.command; 
+					
 					for( var i = 0; i < tempStackBlock.length; i++){ 
 						if ( tempStackBlock[i] ===  command2) {
 						 tempStackBlock.splice(i, 1); 

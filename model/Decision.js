@@ -14,7 +14,7 @@ Decision = function(x, y, ctx, command){
 	this.moving = false;
 	this.linksyes = null;
 	this.linkno = null;
-	this.wline = 40;
+	this.wline = 60;
 	this.type = "decision";
 	
 	
