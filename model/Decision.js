@@ -36,6 +36,7 @@ Decision.prototype.printBlock = function(){
 	this.ctx.lineTo(this.x+this.w/2 + this.m/4 , this.y);
 	
 	this.ctx.closePath(); 
+	this.ctx.fill();
 	this.ctx.stroke();
 	this.ctx.fillText("no", this.x - this.m/4 - this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
 	this.ctx.fillText("yes", this.x + this.w + this.m/2 + this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
@@ -47,6 +48,9 @@ Decision.prototype.printText = function(){
 	ctx.textAlign = "center";
 	this.ctx.fillText(this.command, this.x + this.w/2 + this.m/4, this.y + this.h/2);
 }
+
+
+
 
 Decision.prototype.printLinks = function(color){
 	this.ctx.globalAlpha = 1;
@@ -78,4 +82,22 @@ Decision.prototype.printLinks = function(color){
 		this.ctx.stroke();
 	}
 }
+
+Decision.prototype.printColider = function(){
+	this.ctx.strokeStyle = "#42f445";
+	this.ctx.strokeRect(this.x - this.m/4, this.y, this.w + this.m/2 + this.m/4 , this.h); 
+}
+
+Decision.prototype.click = function(x, y){
+
+	if ( ( (x > this.x-this.m/4)  
+		&&  (x < this.x+ this.w + this.m/2 + this.m/4)) 
+		&& ( (y > this.y)  
+		&&  (y < this.y+this.h))) {
+		return true;	
+	}
+	
+	return false;
+}
+
 

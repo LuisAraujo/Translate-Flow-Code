@@ -33,7 +33,7 @@ body{
 	height: calc(100% - 80px);
 	width: 290px;
 	border-radius: 10px;
-	float: right;
+	float: left;
 	margin-right: 10px;
 	padding: 5px;
 	background-color: #fff;
@@ -81,9 +81,36 @@ body{
 #canv-flow{
 	border: 1px solid #888;
 	background-color: #fff;
-	float: right;
-	
+	float: left;
+	background-image: url("../src/images/bg.png");
+	background-size: 100px;	
 }
+
+#menu-icons{
+	height: calc(100% - 80px);
+	width: 50px;
+	float:left;
+	background-color: #aaa;
+	border-radius: 10px;
+	border: solid 1px #777;
+	margin-right: 5px;
+	padding: 2px;
+	padding-top: 8px;
+}
+
+.bt-menu-icons{
+	width: calc(100% - 2px);
+	height: 40px;
+	border-radius: 2px;
+	border: solid 1px #777;
+	margin-bottom: 5px;
+}
+
+.bt-menu-icons:hover{
+	background-color: #999;
+	cursor: pointer;
+}
+
 
 
 #container-code{
@@ -93,7 +120,7 @@ body{
 	margin-right: 20px;
 	border: 1px solid #888;
 	background-color: #fff;
-	float: right;
+	float: left;
 	
 }
 

@@ -12,11 +12,11 @@ Block = function(x, y, ctx, command){
 	this.selected = false;
 	this.moving = false;
 	this.links = [];
-	this.propText = 1;
+	
 	this.type= "";
 	
 }
-
+Block.prototype.propText = 1;
 
 
 Block.prototype.printRegular = function(){
@@ -24,11 +24,14 @@ Block.prototype.printRegular = function(){
 	this.ctx.font = "15px Courier New";
 	this.ctx.lineWidth = "2";
 	this.ctx.strokeStyle = "black";
+	this.ctx.fillStyle = "white";
 	
 	this.printBlock();
 	this.printText();
 
 	this.printLinks();
+	if(ef.debug)
+	this.printColider();
 }
 
 Block.prototype.printLinks = function(color){
@@ -47,6 +50,7 @@ Block.prototype.printLinks = function(color){
 Block.prototype.printSelected = function(){
 	this.ctx.strokeStyle = "#4286f4";
 	this.ctx.font = "15px Courier New";
+	this.ctx.fillStyle = "white";
 	this.ctx.lineWidth = "2";
 	this.printBlock();
 	this.printText();
@@ -55,6 +59,7 @@ Block.prototype.printSelected = function(){
 
 Block.prototype.printMoving = function(){
 	this.ctx.font = "15px Courier New";
+	this.ctx.fillStyle = "white";
 	this.ctx.lineWidth = "2";
 	this.ctx.strokeStyle = "#aaa";
 	this.printBlock();
@@ -95,7 +100,8 @@ Block.prototype.updateCommand = function(command){
 }
 	
 Block.prototype.resizeBlock = function(){
-	this.w = this.ctx.measureText(this.command).width * this.propText;
+	console.log(this.propText, this.w, parseInt(this.ctx.measureText(this.command).width * this.propText))
+	this.w = parseInt(this.ctx.measureText(this.command).width * this.propText);
 }
 
 
@@ -103,6 +109,10 @@ Block.prototype.addLink = function(idblock){
 	this.links.push(idblock);
 }
 
+Block.prototype.printColider = function(){
+	this.ctx.strokeStyle = "#42f445";
+	this.ctx.strokeRect(this.x, this.y, this.w + this.m *2 , this.h); 
+}
 
 Block.prototype.getType = function(){
 	return this.type;

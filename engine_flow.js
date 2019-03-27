@@ -1,5 +1,5 @@
 EngineFlow = function(){	
-	
+	this.debug = true;
 	this.selectedBlock;	
 	this.marginX;
 	this.ctrl = false;

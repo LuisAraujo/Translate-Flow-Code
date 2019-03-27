@@ -91,4 +91,8 @@ canvas.addEventListener("mousemove", function(evt){
 	}
 	
 });
+
+canvas.addEventListener('dblclick', function (evt) {
+	alert("test double click");
+});
 	

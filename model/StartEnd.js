@@ -24,6 +24,7 @@ StartEnd.prototype.printBlock = function(){
     this.ctx.beginPath();
 	roundRect(this.ctx, this.x, this.y, this.w+this.m, this.h, this.h/2, 0, true); 
    	this.ctx.closePath();
+	this.ctx.fill();
 	this.ctx.stroke();
 	
 }
@@ -34,6 +35,24 @@ StartEnd.prototype.printText = function(){
 	this.ctx.textAlign = "center";
 	this.ctx.fillText(this.command, this.x + this.m/2 + this.w/2  ,this.y + this.h/2);
 }
+
+StartEnd.prototype.printColider = function(){
+	this.ctx.strokeStyle = "#42f445";
+	this.ctx.strokeRect(this.x, this.y, this.w + this.m  , this.h); 
+}
+
+Block.prototype.click = function(x, y){
+
+	if ( ( (x > this.x)  
+		&&  (x < this.x+ this.w+this.m)) 
+		&& ( (y > this.y)  
+		&&  (y < this.y+this.h))) {
+		return true;	
+	}
+	
+	return false;
+}
+
 
 StartEnd.prototype.updateCommand = function(command){
 	alert("Do not is possible change start and end command");

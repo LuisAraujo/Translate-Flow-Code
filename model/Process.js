@@ -14,6 +14,7 @@ Process = function(x, y, ctx, command){
 	this.links = [];
 	this.type = "process";
 	
+	
 }
 
 herda(Block, Process);
@@ -21,7 +22,8 @@ herda(Block, Process);
 
 
 Process.prototype.printBlock = function(){
-    this.ctx.strokeRect(this.x, this.y, this.w + this.m *2 , this.h); 
+    this.ctx.fillRect(this.x, this.y, this.w + this.m *2 , this.h); 
+	this.ctx.strokeRect(this.x, this.y, this.w + this.m *2 , this.h); 
 	 
 }
 
