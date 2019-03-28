@@ -1,9 +1,11 @@
 EngineFlow = function(){	
-	this.debug = true;
+	this.debug = false;
 	this.selectedBlock;	
 	this.marginX;
 	this.ctrl = false;
-	
+	this.wsize = parseInt($("#canv-flow").css("width").substring(0,$("#canv-flow").css("width").length-2));
+	this.hsize = parseInt($("#canv-flow").css("height").substring(0,$("#canv-flow").css("height").length-2));
+	console.log(this.wsize);
 	_this = this;
 	window.onkeyup = function(e){
 		if(e.key == "Control")
@@ -52,7 +54,7 @@ EngineFlow.prototype.addBlock = function(block){
 }
 
 EngineFlow.prototype.loop = function(_this){	
-	ctx.clearRect(0,0,500,500);
+	ctx.clearRect(0,0,this.wsize,this.hsize);
 
 	for(i=0; i < _this.stackBlock.length; i++){
 		_this.stackBlock[i].print();

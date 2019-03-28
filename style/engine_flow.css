@@ -1,9 +1,17 @@
+html{
+	
+	width:100%;
+	height: 100%;
+}
+
 body{
 	margin: 0px;
 	background-color: #ddd;
 	overflow: hidden;
+	margin: 0px;
+	width:100%;
+	height: 100%;
 }
-
 #msg-alert{
 	position: fixed;
 	bottom: 10px;
@@ -22,11 +30,81 @@ body{
 }
 
 #sup-menu{
-	width: 100%;
+	width: calc(100% - 10px);
 	height: 50px;
-	background-color: #111;
+	background-color: #fff;
 	margin-bottom: 10px;
+	padding-left: 10px;
 }
+
+#container-bts-menu{
+	float:left;
+	margin-left: 20px;
+	margin-top: 5px;
+}
+.bt-menu{
+	width: 40px;
+	height: calc(100% - 10px);
+	float:left;
+	border: solid 1px #aaa;
+	background-size: 100%;
+	border-radius: 5px;
+	margin-left: 5px;
+}
+
+.bt-menu:hover{
+	cursor:pointer;
+	background-color: #eee;
+	background-repeat:  no-repeat;
+}
+
+#logo-menu{
+	height: calc(100% - 10px);
+	margin-top: 5px;
+	float:left;
+}
+
+
+#bt-run{
+	background-image: url("../icon-bt-run.png");
+}
+
+#bt-code{
+	background-image: url("../icon-bt-code.png");
+}
+#container-user-menu{
+	float:right;
+	width: 150px;
+	height: 100%;
+	margin-right: 10px;
+}
+
+#container-user-menu div{
+	float:right;
+	margin-left: 10px;
+}
+
+#profile-user-menu{
+	background-color: #eee;
+	background-image: url("../profile.png");
+	background-size: 100%;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+}
+
+#name-user-menu{
+	height: 20px;
+	width: 80px;
+	font-size: 12px;
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: bold; 
+	margin-top: 10px;
+}
+
+
 
 #block-scroll{
 	font-family: Courier New;
@@ -77,22 +155,29 @@ body{
 	font-weight: bold;	
 	font-family: "Arial";
 }
-
+#container-canvas{
+	float: left;
+	width: calc(100% - 80px);
+	max-height: calc(100% - 80px);
+	overflow: scroll;
+	
+}
 #canv-flow{
 	border: 1px solid #888;
 	background-color: #fff;
-	float: left;
+	
 	background-image: url("../src/images/bg.png");
 	background-size: 100px;	
 }
 
 #menu-icons{
 	height: calc(100% - 80px);
-	width: 50px;
+	width: 40px;
+	margin-left: 5px;
 	float:left;
-	background-color: #aaa;
+	background-color: #108B93;
 	border-radius: 10px;
-	border: solid 1px #777;
+	border: solid 1px #1A6666;
 	margin-right: 5px;
 	padding: 2px;
 	padding-top: 8px;
@@ -102,12 +187,13 @@ body{
 	width: calc(100% - 2px);
 	height: 40px;
 	border-radius: 2px;
-	border: solid 1px #777;
+	border: solid 1px #11B8BC;
 	margin-bottom: 5px;
+	background-size: 100%;
 }
 
 .bt-menu-icons:hover{
-	background-color: #999;
+	background-color: #11B8BC;
 	cursor: pointer;
 }
 
@@ -133,4 +219,27 @@ body{
 }
 #bt-geratecode:hover{
 	background-color: #ef3258 !important;
+}
+
+#bt-new-block{
+	background-image: url("../icon_createnew.png");	
+}
+
+
+#bt-connect-link{
+	background-image: url("../icon_connectline.png");	
+}
+
+
+#bt-connect-block{
+	background-image: url("../icon_connectblock.png");	
+}
+
+#bt-delete-link{
+	background-image: url("../icon_deletelink.png");	
+}
+
+
+#bt-delete-block{
+	background-image: url("../icon_deleteblock.png");	
 }

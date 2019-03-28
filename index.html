@@ -1,9 +1,26 @@
 <html>
 <head>
  <link rel="stylesheet" href="style/engine_flow.css">
+ <title>Translate Flow Code v0.1</title>
+ <link rel="icon" href="logo2.png" sizes="16x16" type="image/png"> 
 </head>
 <body>
-<div id="sup-menu"></div>
+<div id="sup-menu">
+	<image src="logo.png" id="logo-menu">
+	<div id="container-bts-menu">
+		<div class="bt-menu" id="bt-run">
+		</div>
+		<div class="bt-menu" id="bt-code">
+		</div>
+	</div>
+	
+	<div id="container-user-menu">
+		<div id="name-user-menu">Luis4raujo</div>
+		<div id="profile-user-menu">
+			
+		</div>
+	</div>
+</div>
 
 <div id="main-container">
 	
@@ -12,7 +29,7 @@
 	</div> -->
 	
 	
-	
+	<!--
 	<div id="block-scroll"> 
 	    <span id="name-block" > Name <span id="name-block"></span></span>
 		<div class="option">
@@ -45,16 +62,20 @@
 		</div>
 		
 		<button id="bt-geratecode">Gerate Code</button>
-	</div>
+	</div> -->
 	
 	
 	<div id="menu-icons">
-			<div class="bt-menu-icons"></div>
-			<div class="bt-menu-icons"></div>
-			<div class="bt-menu-icons"></div>
+			<div class="bt-menu-icons" id="bt-new-block"></div>
+			<div class="bt-menu-icons" id="bt-connect-link"></div>
+			<div class="bt-menu-icons" id="bt-connect-block"></div>
+			<div class="bt-menu-icons" id="bt-delete-link"></div>
+			<div class="bt-menu-icons" id="bt-delete-block"></div>
 	</div>
-	<canvas width="700px" height="560" id="canv-flow"> </canvas>
-
+	
+	<div id="container-canvas">
+		<canvas width="1000px" height="560" id="canv-flow"> </canvas>
+	</div>
 
 </div>
 <!--
