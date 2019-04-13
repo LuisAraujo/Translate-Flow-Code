@@ -33,7 +33,6 @@ body{
 	width: calc(100% - 10px);
 	height: 50px;
 	background-color: #fff;
-	margin-bottom: 10px;
 	padding-left: 10px;
 }
 
@@ -43,6 +42,7 @@ body{
 	margin-top: 5px;
 }
 .bt-menu{
+	
 	width: 40px;
 	height: calc(100% - 10px);
 	float:left;
@@ -50,6 +50,7 @@ body{
 	background-size: 100%;
 	border-radius: 5px;
 	margin-left: 5px;
+
 }
 
 .bt-menu:hover{
@@ -57,6 +58,8 @@ body{
 	background-color: #eee;
 	background-repeat:  no-repeat;
 }
+
+
 
 #logo-menu{
 	height: calc(100% - 10px);
@@ -72,6 +75,7 @@ body{
 #bt-code{
 	background-image: url("../icon-bt-code.png");
 }
+
 #container-user-menu{
 	float:right;
 	width: 150px;
@@ -83,7 +87,34 @@ body{
 	float:right;
 	margin-left: 10px;
 }
+#container-msg-menu{
+	float:left;
+	margin-left: 10px;
+	position: relative;
+	top: 15px;
+	color: #999;
+	width: 600px;
+	
+}
 
+#title-project{
+	color: #000;
+	font-weight: bold;
+	font-size: 20px;
+	max-width: 350px;
+	font-family: Arial;
+	border: solid 2px #fff;
+	border-radius: 5px;
+	padding-left: 1px;	
+}
+#title-project:hover{
+	border: solid 2px #aaa;
+}
+
+#title-project:focus{
+	border: solid 2px #1A6666;
+	outline: none;
+}
 #profile-user-menu{
 	background-color: #eee;
 	background-image: url("../profile.png");
@@ -157,8 +188,8 @@ body{
 }
 #container-canvas{
 	float: left;
-	width: calc(100% - 80px);
-	max-height: calc(100% - 80px);
+	width: 100%;
+	height:100%;
 	overflow: scroll;
 	
 }
@@ -171,7 +202,9 @@ body{
 }
 
 #menu-icons{
-	height: calc(100% - 80px);
+	position: fixed; 
+	top: 60px;
+	height: 300px;
 	width: 40px;
 	margin-left: 5px;
 	float:left;
@@ -183,13 +216,21 @@ body{
 	padding-top: 8px;
 }
 
+#submenu-icons{
+	position: fixed; 
+	top: 70px;
+	left: 50px;
+	display: none;
+}
+
 .bt-menu-icons{
 	width: calc(100% - 2px);
 	height: 40px;
 	border-radius: 2px;
 	border: solid 1px #11B8BC;
 	margin-bottom: 5px;
-	background-size: 100%;
+	background-size: contain;
+	
 }
 
 .bt-menu-icons:hover{
@@ -198,6 +239,28 @@ body{
 }
 
 
+.bt-submenu-icons{
+	
+	width:40px;
+	height:40px;
+	float:left;
+	border-radius:2px;
+	border: solid 1px #11B8BC;
+	margin-bottom: 5px;
+	background-size: contain;
+	background-color: #108B93;
+	margin-left: 2px;
+	box-shadow: 4px 4px 5px grey;
+}
+
+.bt-submenu-icons:hover{
+	background-color: #11B8BC;
+	cursor: pointer;
+}
+
+.disable{
+	background-color: #efefef !important;	
+}
 
 #container-code{
 	width: 500px;
@@ -243,3 +306,37 @@ body{
 #bt-delete-block{
 	background-image: url("../icon_deleteblock.png");	
 }
+
+
+#bt-new-process{
+	background-image: url("../icon_createnewprocess.png");	
+}
+
+
+#bt-new-decision{
+	background-image: url("../icon_createnewdecision.png");	
+}
+
+
+#bt-new-conection{
+	background-image: url("../icon_createnewconection.png");	
+}
+
+#bt-new-end{
+	background-image: url("../icon_createnewend.png");	
+}
+
+#bt-new-start{
+	background-image: url("../icon_createnewstart.png");	
+}
+
+
+#bt-new-input{
+	background-image: url("../icon_createnewinput.png");	
+}
+
+
+#bt-new-output{
+	background-image: url("../icon_createnewoutput.png");	
+}
+

@@ -11,7 +11,7 @@ Block = function(x, y, ctx, command){
 	this.w = this.ctx.measureText(this.command).width;
 	this.selected = false;
 	this.moving = false;
-	this.links = [];
+	this.links = new Array();
 	
 	this.type= "";
 	
@@ -104,6 +104,9 @@ Block.prototype.resizeBlock = function(){
 	this.w = parseInt(this.ctx.measureText(this.command).width * this.propText);
 }
 
+Block.prototype.clearLinks = function(idblock){
+	this.links = new Array();
+}
 
 Block.prototype.addLink = function(idblock){
 	this.links.push(idblock);
