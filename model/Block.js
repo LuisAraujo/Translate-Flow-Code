@@ -35,15 +35,33 @@ Block.prototype.printRegular = function(){
 }
 
 Block.prototype.printLinks = function(color){
+	
+	if(this.links.length < 1 )
+		 return;
+	 
 	this.ctx.globalAlpha = 1;
-	for(var i=0; i<this.links.length; i++){
+	//for(var i=0; i<this.links.length; i++){
 		this.ctx.strokeStyle = color == undefined?"#000":color;
 		this.ctx.beginPath();
-		this.ctx.moveTo(this.x + this.w/2 + this.m/2, this.y+this.h);
-		this.ctx.lineTo(this.links[i].x + this.links[i].w/2 + this.m/2, this.links[i].y);
-		this.ctx.closePath();
+		
+		var x_start = this.x + this.w/2 + this.m/2;
+		var y_start = this.y+this.h;
+		var x_end = this.links[0].x + this.links[0].w/2 + this.m/2;
+		var y_end =  this.links[0].y;
+		
+		var y_middle = y_start + (y_end - y_start) / 2; //y_start * 1.5;
+		
+		
+		
+		//this.links[0].x + this.links[0].w/2 + this.m/2
+		this.ctx.moveTo(x_start, y_start);
+		this.ctx.lineTo(x_start, y_middle);
+		this.ctx.lineTo(x_end, y_middle);
+		this.ctx.lineTo(x_end, y_end);
+		//this.ctx.closePath();
+		
 		this.ctx.stroke();
-	}
+	//}
 }
 
 

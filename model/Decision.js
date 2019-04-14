@@ -58,12 +58,12 @@ Decision.prototype.printLinks = function(color){
 
 	if(this.linkyes){
 		this.ctx.beginPath();
-		this.ctx.moveTo(this.x - this.m/4 ,  this.y+this.h/2);
-		this.ctx.lineTo(this.x - this.m/4 - this.wline,  this.y+this.h/2);
+		this.ctx.moveTo(this.x - this.m/4,  this.y+this.h/2);
+		this.ctx.lineTo(this.linkyes.x + this.linkyes.w/2 + this.m/2 ,  this.y+this.h/2);
 		this.ctx.closePath();
 		this.ctx.stroke();
 		this.ctx.beginPath();
-		this.ctx.moveTo(this.x - this.m/4 - this.wline,  this.y+this.h/2);
+		this.ctx.moveTo(this.linkyes.x + this.linkyes.w/2 + this.m/2,  this.y+this.h/2);
 		this.ctx.lineTo(this.linkyes.x + this.linkyes.w/2 + this.m/2, this.linkyes.y);
 		this.ctx.closePath();
 		this.ctx.stroke();
@@ -72,11 +72,11 @@ Decision.prototype.printLinks = function(color){
 	if(this.linkno){
 		this.ctx.beginPath();
 		this.ctx.moveTo(this.x + this.w + this.m/2,  this.y+this.h/2);
-		this.ctx.lineTo(this.x + this.w + this.m/2 + this.wline,  this.y+this.h/2);
+		this.ctx.lineTo(this.linkno.x + this.linkno.w/2 + this.m/2,  this.y+this.h/2);
 		this.ctx.closePath();
 		this.ctx.stroke();
 		this.ctx.beginPath();
-		this.ctx.moveTo(this.x + this.w + this.m/2 + this.wline,  this.y+this.h/2);
+		this.ctx.moveTo(this.linkno.x + this.linkno.w/2 + this.m/2,  this.y+this.h/2);
 		this.ctx.lineTo(this.linkno.x + this.linkno.w/2 + this.m/2, this.linkno.y);
 		this.ctx.closePath();
 		this.ctx.stroke();

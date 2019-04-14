@@ -340,3 +340,34 @@ body{
 	background-image: url("../icon_createnewoutput.png");	
 }
 
+.bt-zoom{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #1A6666;
+	background-size: 30px;
+	background-position: 10px;
+	background-repeat: no-repeat;
+	box-shadow: 2px 4px 5px grey;
+}
+.bt-zoom:hover{
+	background-color:#108B93;
+	cursor: pointer;
+}
+
+#bt-zoom-in{
+	position: absolute;
+	bottom: 40px;
+	right: 40px;
+	background-image: url("../bt-zoom-in.png");
+
+}
+
+#bt-zoom-out{
+	position: absolute;
+	bottom: 40px;
+	right: 100px;
+	background-image: url("../bt-zoom-out.png");
+	
+	
+}

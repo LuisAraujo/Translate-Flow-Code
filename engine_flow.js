@@ -5,19 +5,33 @@ EngineFlow = function(){
 	this.ctrl = false;
 	this.wsize = parseInt($("#container-canvas").css("width").substring(0,$("#container-canvas").css("width").length-2));
 	this.hsize = parseInt($("#container-canvas").css("height").substring(0,$("#container-canvas").css("height").length-2));
+	this.lastBlock_y = 0; 
 	_this = this;
 	
 	window.onkeyup = function(e){
+		
+		
 		if(e.key == "Control")
 			_this.ctrl = false;
 	}
 	
 	
 	window.onkeydown = function(e){
+		
+		//e.preventdefault();
+		
 		if(e.key == "Control")
 			_this.ctrl = true;
 	}
 	
+	BT_ZOOM_IN.click(function(){
+		console.log(canvas.scale);
+		_this.zoomCanvas(1.1);
+	});
+	
+	BT_ZOOM_OUT.click(function(){
+		_this.zoomCanvas(0.9);
+	});
 	
 	BT_UPDATE_BLOCK.click(function(){
 		var command = $("#command-block").val();
@@ -106,6 +120,8 @@ EngineFlow.prototype.loop = function(_this){
 
 	for(i=0; i < _this.stackBlock.length; i++){
 		_this.stackBlock[i].print();
+		if(this.lastBlock_y < _this.stackBlock[i].y)
+			this.lastBlock_y = _this.stackBlock[i].y;
 	};
 	
 	window.requestAnimationFrame( function(){ _this.loop(_this)} );
@@ -180,3 +196,17 @@ EngineFlow.prototype.getCommands = function(){
 	};
 	
 }
+
+
+EngineFlow.prototype.zoomCanvas = function(zoom){
+	ctx.scale(zoom, zoom);
+	resizeCanvas();
+}
+
+
+EngineFlow.prototype.resizeCanvas = function(_this){	
+
+	if(this.lastBlock_y > canvas.height);
+	    canvas.height =  lastBlock_y + 100;
+}
+

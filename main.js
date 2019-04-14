@@ -9,6 +9,8 @@ const BT_DEL_BLOCK = $("#bt-delete-block");
 const BT_GERATE_CODE = $("#bt-geratecode");
 const BT_UPDATE_BLOCK = $("#bt-updateblock");
 const SUB_MENU_BTICONS = $("#submenu-icons");
+const BT_ZOOM_IN = $("#bt-zoom-in");
+const BT_ZOOM_OUT = $("#bt-zoom-out");
 
 const canvas = document.getElementById("canv-flow");
 const ctx = canvas.getContext("2d");
