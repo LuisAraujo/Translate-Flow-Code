@@ -7,12 +7,12 @@ Decision = function(x, y, ctx, command){
 	this.ctx.font = "15px Courier New";
 	this.h = 70;
 	this.m = 20;
-	this.command = "A > 10";
+	this.command = command;
 	this.propText = 1.6;
 	this.w = this.ctx.measureText(this.command).width * this.propText;
 	this.selected = false;
 	this.moving = false;
-	this.linksyes = null;
+	this.linkyes = null;
 	this.linkno = null;
 	this.wline = 60;
 	this.type = "decision";
@@ -56,7 +56,7 @@ Decision.prototype.printLinks = function(color){
 	this.ctx.globalAlpha = 1;
 	this.ctx.strokeStyle = color == undefined?"#000":color;
 
-	if(this.linkyes){
+	if(this.linkyes != null){
 		this.ctx.beginPath();
 		this.ctx.moveTo(this.x - this.m/4,  this.y+this.h/2);
 		this.ctx.lineTo(this.linkyes.x + this.linkyes.w/2 + this.m/2 ,  this.y+this.h/2);
@@ -69,7 +69,7 @@ Decision.prototype.printLinks = function(color){
 		this.ctx.stroke();
 	}
 	
-	if(this.linkno){
+	if(this.linkno != null){
 		this.ctx.beginPath();
 		this.ctx.moveTo(this.x + this.w + this.m/2,  this.y+this.h/2);
 		this.ctx.lineTo(this.linkno.x + this.linkno.w/2 + this.m/2,  this.y+this.h/2);
@@ -100,4 +100,12 @@ Decision.prototype.click = function(x, y){
 	return false;
 }
 
+
+/*@overwite*/
+Decision.prototype.removeLinks = function(block){
+	if(this.linkyes == block)
+		this.linkyes = null;
+	else
+		this.linkno = null;	
+}
 

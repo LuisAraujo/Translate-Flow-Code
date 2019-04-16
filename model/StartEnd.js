@@ -13,9 +13,6 @@ StartEnd = function(x, y, ctx, command){
 	this.moving = false;
 	this.links = [];
 	this.type = command;
-
-	
-	
 }
 
 herda(Block, StartEnd);

@@ -3,7 +3,7 @@ COLOR.line_block = "black";
 
 const BT_NEW_BLOCK = $("#bt-new-block");
 const BT_NEW_CLINK = $("#bt-connect-link");
-const BT_NEW_CBLOCK = $("#bt-connect-block");
+//const BT_NEW_CBLOCK = $("#bt-connect-block");
 const BT_DEL_LINK = $("#bt-delete-link");
 const BT_DEL_BLOCK = $("#bt-delete-block");
 const BT_GERATE_CODE = $("#bt-geratecode");
@@ -11,6 +11,15 @@ const BT_UPDATE_BLOCK = $("#bt-updateblock");
 const SUB_MENU_BTICONS = $("#submenu-icons");
 const BT_ZOOM_IN = $("#bt-zoom-in");
 const BT_ZOOM_OUT = $("#bt-zoom-out");
+/*BUTTONS FOR CREATE BLOCKS*/
+const BT_NEW_BLOCK_PROCESS = $("#bt-new-process");
+const BT_NEW_BLOCK_DECISION = $("#bt-new-decision");
+const BT_NEW_BLOCK_INPUT = $("#bt-new-input");
+const BT_NEW_BLOCK_OUTPUT = $("#bt-new-output");
+const BT_NEW_BLOCK_CONNECT= $("#bt-new-conection");
+const BT_NEW_BLOCK_START = $("#bt-new-start");
+const BT_NEW_BLOCK_END = $("#bt-new-end");
+
 
 const canvas = document.getElementById("canv-flow");
 const ctx = canvas.getContext("2d");
@@ -18,7 +27,7 @@ const ctx = canvas.getContext("2d");
 
 ef = new EngineFlow();
 ef.start();
-
+/*
 s = new StartEnd(250,10, ctx, "Start");
 p = new Process(200,100, ctx, "numero = 10");
 d = new Decision(200,200, ctx, "numero%2 = 0");
@@ -41,7 +50,7 @@ d.linkno = p3;
 
 p2.addLink(c);
 p3.addLink(c);
-
+*/
 
 function getMousePos(canvas, evt) {
 	var rect = canvas.getBoundingClientRect();
@@ -55,36 +64,53 @@ function getMousePos(canvas, evt) {
 /** FUNCTIONS MOUSE **/
 canvas.addEventListener('mousedown', function (evt) {
 		
-		
+	var old_selectedBlock = null;
 	var mousePos = getMousePos(canvas, evt);
 	var posx =  mousePos.x ;
 	var posy =  mousePos.y ;
 	
+	//hiding submenu buttons
 	if(SUB_MENU_BTICONS.css("display") == "block")
 		SUB_MENU_BTICONS.hide();
 	
+	//if have a old selected block in memory
 	if((ef.selectedBlock  != null) && (ef.selectedBlock  != undefined) && (ef.selectedBlock.selected) ){
 		ef.selectedBlock.moving = false;
 		ef.selectedBlock.selected = false;
+		
+		if(ef.linkingblocks)
+			old_selectedBlock = ef.selectedBlock;
+		
 		ef.selectedBlock  = null;
-		//BT_NEW_BLOCK.addClass("disable");
 	}
 		
 	arrayBlocks = ef.stackBlock;
-
+	
+	
 	for(var i=0; i< arrayBlocks.length; i++){
 		 
 		if( arrayBlocks[i].click(posx, posy)){
 			
-			ef.selectedBlock = arrayBlocks[i];
-			ef.selectedBlock.selected = true;
-			if(ef.ctrl)
-				ef.selectedBlock.moving = true;
-	
-			ef.marginX = mousePos.x - ef.selectedBlock.x
-			
-			ef.setDataInMenu();
-			
+			if( (ef.linkingblocks) && (old_selectedBlock != null)) {
+				console.log("linking blocks");
+				
+				ef.selectedBlock = arrayBlocks[i];
+				old_selectedBlock.addLink(ef.selectedBlock);
+				
+				ef.linkingblocks = false;
+				
+			}else{
+		
+				ef.selectedBlock = arrayBlocks[i];
+				ef.selectedBlock.selected = true;
+				
+				if(ef.ctrl)
+					ef.selectedBlock.moving = true;
+		
+				ef.marginX = mousePos.x - ef.selectedBlock.x
+				
+				ef.setDataInMenu();
+			}
 			break;
 		}
 	}

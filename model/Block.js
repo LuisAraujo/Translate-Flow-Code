@@ -48,7 +48,6 @@ Block.prototype.printLinks = function(color){
 		var y_start = this.y+this.h;
 		var x_end = this.links[0].x + this.links[0].w/2 + this.m/2;
 		var y_end =  this.links[0].y;
-		
 		var y_middle = y_start + (y_end - y_start) / 2; //y_start * 1.5;
 		
 		
@@ -123,13 +122,30 @@ Block.prototype.resizeBlock = function(){
 }
 
 Block.prototype.clearLinks = function(idblock){
+	if(this.__proto__ == Decision.prototype){ 
+		this.linkyes = null;
+		this.linkno = null;	
+	}else
 	this.links = new Array();
 }
 
-Block.prototype.addLink = function(idblock){
-	this.links.push(idblock);
+Block.prototype.addLink = function(block){
+	
+	if(this.__proto__ == Decision.prototype){
+		if(this.linkyes == null)
+			this.linkyes = block;
+		else		
+			this.linkno = block;			
+	}else
+		this.links.push(block);
 }
 
+Block.prototype.removeLinks = function(block){
+	for(var i = 0; i < this.links.length; i++){
+		if(this.links[i] == block)
+			this.links.splice(i, 1); 
+	}
+}
 Block.prototype.printColider = function(){
 	this.ctx.strokeStyle = "#42f445";
 	this.ctx.strokeRect(this.x, this.y, this.w + this.m *2 , this.h); 
