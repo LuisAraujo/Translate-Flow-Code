@@ -3,10 +3,16 @@ MsgErroManager = function(){
 }
 
 
-MsgErroManager.prototype.showMessage = function(msg){
+MsgErroManager.prototype.showMessage = function(msg, error){
 	MSG_TEXT_ERRO.text = this.mesagens[msg];
-	MSG_CONTAINER_ERRO.show();
+	if(error){
+		MSG_CONTAINER_ERRO.addClass("msg-erro");
+	}else{
+		MSG_CONTAINER_ERRO.removeClass("msg-erro");
+	}
+	
+	MSG_ERRO.show();
 	window.setTimeout( function(){
-		MSG_CONTAINER_ERRO.hide();
+		MSG_ERRO.hide();
 	}, 5000);
 }

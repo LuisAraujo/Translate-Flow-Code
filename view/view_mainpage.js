@@ -1,0 +1,281 @@
+const COLOR = new Object();
+COLOR.line_block = "black";
+
+const BT_NEW_BLOCK = $("#bt-new-block");
+const BT_NEW_CLINK = $("#bt-connect-link");
+//const BT_NEW_CBLOCK = $("#bt-connect-block");
+const BT_DEL_LINK = $("#bt-delete-link");
+const BT_DEL_BLOCK = $("#bt-delete-block");
+const BT_GERATE_CODE = $("#bt-geratecode");
+const BT_UPDATE_BLOCK = $("#bt-updateblock");
+const SUB_MENU_BTICONS = $("#submenu-icons");
+const BT_ZOOM_IN = $("#bt-zoom-in");
+const BT_ZOOM_OUT = $("#bt-zoom-out");
+/*BUTTONS FOR CREATE BLOCKS*/
+const BT_NEW_BLOCK_PROCESS = $("#bt-new-process");
+const BT_NEW_BLOCK_DECISION = $("#bt-new-decision");
+const BT_NEW_BLOCK_INPUT = $("#bt-new-input");
+const BT_NEW_BLOCK_OUTPUT = $("#bt-new-output");
+const BT_NEW_BLOCK_CONNECT= $("#bt-new-conection");
+const BT_NEW_BLOCK_START = $("#bt-new-start");
+const BT_NEW_BLOCK_END = $("#bt-new-end");
+
+
+const canvas = document.getElementById("canv-flow");
+const ctx = canvas.getContext("2d");
+
+const MSG_ERRO = $("#msg-for-user");
+const MSG_TEXT_ERRO = $("#text-msg-for-user");
+const MSG_TIP_ERRO = $("#tip-msg-for-user");
+const MSG_CONTAINER_ERRO = $("#container-text-msg-for-user");
+
+
+
+ef = new EngineFlow();
+ef.start();
+
+window.onkeydown = function(e){
+	
+	if(e.key == "Control")
+		ef.downCtrl();
+}
+
+window.onkeyup = function(e){
+	if(e.key == "Control")
+		ef.upCtrl();
+}
+
+window.onresize = function(){
+	ef.resizeCanvas();
+};
+
+BT_ZOOM_IN.click(function(){
+	ef.zoomCanvas(1.1);
+});
+
+BT_ZOOM_OUT.click(function(){
+	ef.zoomCanvas(0.9);
+});
+
+
+BT_UPDATE_BLOCK.click(function(){
+	var command = $("#command-block").val();
+	if(ef.selectedBlock)
+		ef.selectedBlock.updateCommand(command);
+});
+
+BT_GERATE_CODE.click(function(){
+	ef.getCommands();	
+});
+
+BT_NEW_BLOCK.click(function(){
+	SUB_MENU_BTICONS.show();
+});
+
+
+
+BT_DEL_BLOCK.click(function(){
+	
+	if(ef.selectedBlock == null){
+		ef.msgerrosmanager.showMessage("no-selected-block", true);
+		return;
+	}
+	ef.removeBlock(ef.selectedBlock);  
+});
+
+
+BT_DEL_LINK.click(function(){
+	if(ef.selectedBlock == null){
+		ef.msgerrosmanager.showMessage("no-selected-block", true);
+		return;
+	}
+	if(ef.selectedBlock.type != "decision")
+		ef.selectedBlock.clearLinks();	
+	else{
+		ef.selectedBlock.linkyes = null;			
+		ef.selectedBlock.linkno = null;			
+	}		
+});
+ 
+ 
+ BT_NEW_CLINK.click(function(){
+	  if(ef.selectedBlock == null){
+		ef.msgerrosmanager.showMessage("no-selected-block", true);
+		return;
+	}
+	ef.msgerrosmanager.showMessage("selected-block");
+	ef.linkingblocks = true;
+ });
+ 
+ 
+ 
+ /*Buttons for New Blocks*/
+ BT_NEW_BLOCK_PROCESS.click(function(){
+		SUB_MENU_BTICONS.hide();
+	   if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			//alert("Choise a block!");
+			return;
+		}
+		
+		var p = new Process(0, 0 , ctx, "/ * your command here* /");
+		p.y = ef.selectedBlock.y + ef.selectedBlock.h + 20;
+		p.x = ef.selectedBlock.x + ef.selectedBlock.w/2 - p.w/2;
+		
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+ });
+ 
+ BT_NEW_BLOCK_DECISION.click(function(){
+	 SUB_MENU_BTICONS.hide();
+	 if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			return;
+		}
+		var p = new Decision(0,0, ctx, "/* code */");
+		p.y = ef.selectedBlock.y + ef.selectedBlock.h + 20;
+		p.x = ef.selectedBlock.x + ef.selectedBlock.w/2 - p.w/2 ;
+		
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+ });
+ 
+ BT_NEW_BLOCK_INPUT.click(function(){
+	 SUB_MENU_BTICONS.hide();
+	 if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			return;
+		}
+		var p = new Process(100,200, ctx, "/ * your command here* /");
+		
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+ });
+ 
+ BT_NEW_BLOCK_OUTPUT.click(function(){
+	 SUB_MENU_BTICONS.hide();
+	 if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			return;
+		}
+		var p = new Process(100,200, ctx, "/ * your command here* /");
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+});
+				
+BT_NEW_BLOCK_CONNECT.click(function(){
+	 SUB_MENU_BTICONS.hide();
+	 if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			return;
+		}
+		p = new Conection(0,0, ctx, "");
+		p.y = ef.selectedBlock.y + ef.selectedBlock.h + 20;
+		p.x = ef.selectedBlock.x + ef.selectedBlock.w/2 - p.w/2 ;
+		
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+ });
+ 
+ BT_NEW_BLOCK_START.click(function(){
+	 SUB_MENU_BTICONS.hide();
+		var p = new StartEnd(canvas.width/2,10, ctx, "Start");
+		ef.addBlock(p);
+ });
+ 
+ BT_NEW_BLOCK_END.click(function(){
+	 SUB_MENU_BTICONS.hide();
+	 if(ef.selectedBlock == null){
+			ef.msgerrosmanager.showMessage("no-selected-block", true);
+			//alert("Choise a block!");
+			return;
+		}
+		var p = new  StartEnd(canvas.width/2,canvas.height- 100, ctx, "End")
+		ef.selectedBlock.addLink(p);
+		ef.addBlock(p);
+ });
+	
+	
+	
+function getMousePos(canvas, evt) {
+	var rect = canvas.getBoundingClientRect();
+	return {
+	  x: evt.clientX - rect.left,
+	  y: evt.clientY - rect.top
+	};
+}
+
+
+/** FUNCTIONS MOUSE **/
+canvas.addEventListener('mousedown', function (evt) {
+		
+	var old_selectedBlock = null;
+	var mousePos = getMousePos(canvas, evt);
+	var posx =  mousePos.x ;
+	var posy =  mousePos.y ;
+	
+	//hiding submenu buttons
+	if(SUB_MENU_BTICONS.css("display") == "block")
+		SUB_MENU_BTICONS.hide();
+	
+	//if have a old selected block in memory
+	if((ef.selectedBlock  != null) && (ef.selectedBlock  != undefined) && (ef.selectedBlock.selected) ){
+		ef.selectedBlock.setInitialState();
+		
+		if(ef.linkingblocks)
+			old_selectedBlock = ef.selectedBlock;
+		
+		ef.selectedBlock  = null;
+	}
+		
+	arrayBlocks = ef.stackBlock;
+
+	for(var i=0; i< arrayBlocks.length; i++){
+		 
+		if( arrayBlocks[i].click(posx, posy)){
+			
+			if( (ef.linkingblocks) && (old_selectedBlock != null)) {
+			
+				ef.selectedBlock = arrayBlocks[i];
+				old_selectedBlock.addLink(ef.selectedBlock);
+				
+				ef.linkingblocks = false;
+				
+			}else{
+		
+				ef.selectedBlock = arrayBlocks[i];
+				ef.selectedBlock.selected = true;
+				
+				if(ef.ctrl)
+					ef.selectedBlock.moving = true;
+		
+				ef.marginX = mousePos.x - ef.selectedBlock.x
+				
+				ef.setDataInMenu();
+			}
+			break;
+		}
+	}
+	
+});
+
+canvas.addEventListener("mousemove", function(evt){
+	
+	var mousePos = getMousePos(canvas, evt);
+	
+	if( ((ef.selectedBlock!=undefined) || (ef.selectedBlock != null) ) && (ef.selectedBlock.moving) && (ef.ctrl)  ){
+		ef.selectedBlock.x  = mousePos.x - ef.marginX;
+		ef.selectedBlock.y = mousePos.y;
+	}
+	
+});
+
+canvas.addEventListener('dblclick', function (evt) {
+	if(ef.selectedBlock){
+		ef.selectedBlock.double_selected = true;
+	}
+});
+
+
+//ADD EVENTS
+

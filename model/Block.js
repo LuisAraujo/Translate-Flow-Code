@@ -10,6 +10,7 @@ Block = function(x, y, ctx, command){
 	this.command = command;
 	this.w = this.ctx.measureText(this.command).width;
 	this.selected = false;
+	this.double_selected = false;
 	this.moving = false;
 	this.links = new Array();
 	
@@ -74,6 +75,17 @@ Block.prototype.printSelected = function(){
 	this.printLinks();
 }
 
+Block.prototype.printDoubleSelected = function(){
+	this.ctx.strokeStyle = "#4286f4";
+	this.ctx.font = "15px Courier New";
+	this.ctx.fillStyle = "white";
+	this.ctx.lineWidth = "2";
+	this.printBlock();
+	//this.printText();
+	this.printLinks();
+}
+
+
 Block.prototype.printMoving = function(){
 	this.ctx.font = "15px Courier New";
 	this.ctx.fillStyle = "white";
@@ -104,6 +116,8 @@ Block.prototype.print = function(){
 	
 	if(this.moving){
 		this.printMoving();
+	}else if(this.double_selected){
+		this.printDoubleSelected();
 	}else if(this.selected){
 		this.printSelected();
 	}else{
@@ -153,4 +167,10 @@ Block.prototype.printColider = function(){
 
 Block.prototype.getType = function(){
 	return this.type;
+}
+
+Block.prototype.setInitialState = function(){
+	this.moving = false;
+	this.selected = false;
+	this.double_selected = false;
 }

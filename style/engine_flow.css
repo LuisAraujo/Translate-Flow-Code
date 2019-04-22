@@ -33,7 +33,7 @@ body{
 
 #sup-menu{
 	width: calc(100% - 10px);
-	height: 50px;
+	height: 60px;
 	background-color: #fff;
 	padding-left: 10px;
 }
@@ -46,7 +46,7 @@ body{
 
 .bt-menu{
 	width: 40px;
-	height: calc(100% - 10px);
+	height: 40px;
 	float:left;
 	border: solid 1px #aaa;
 	background-size: 100%;
@@ -70,6 +70,17 @@ body{
 }
 
 
+#bt-open{
+	background-image: url("../src/images/icon-bt-open.png");
+}
+
+#bt-export{
+	background-image: url("../src/images/icon-bt-export.png");
+}
+
+#bt-new{
+	background-image: url("../src/images/icon-bt-new.png");
+}
 #bt-run{
 	background-image: url("../src/images/icon-bt-run.png");
 }
@@ -215,8 +226,8 @@ body{
 
 #menu-icons{
 	position: fixed; 
-	top: 60px;
-	height: 300px;
+	top: 70px;
+	
 	width: 40px;
 	margin-left: 5px;
 	float:left;
@@ -399,6 +410,11 @@ body{
 	text-align: center;
 	min-width: 200px;
 }
+
+.msg-error{
+	background-color: #bc1123 !important;	
+}
+
 
 #msg-for-user #close-msg-for-user{
 	background-color: #FFF;
