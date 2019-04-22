@@ -2,11 +2,11 @@
 <head>
  <link rel="stylesheet" href="style/engine_flow.css">
  <title>Translate Flow Code v0.1</title>
- <link rel="icon" href="logo2.png" sizes="16x16" type="image/png"> 
+ <link rel="icon" href="src/images/logo2.png" sizes="16x16" type="image/png"> 
 </head>
 <body>
 <div id="sup-menu">
-	<image src="logo.png" id="logo-menu">
+	<image src="src/images/logo.png" id="logo-menu">
 	<div id="container-bts-menu">
 		<div class="bt-menu" id="bt-new" title="New Flow" >
 		</div>
@@ -67,6 +67,13 @@
 	Pressione <b>Ctrl</b> para mover o bloco
 </div>
 -->
+<div id="msg-for-user">
+	<div id="close-msg-for-user"></div>
+	<span id="container-text-msg-for-user">
+		<span id="text-msg-for-user">You must select a block. </span>
+		<a id="tip-msg-for-user">Get a tip</a>!
+	</span>
+</div>
 
 <script src="src/jquery-3.2.1.min.js"></script>
 
@@ -78,6 +85,7 @@
 <script src="model/StartEnd.js"></script>
 <script src="model/Decision.js"></script>
 <script src="model/Process.js"></script>
+<script src="contoller/msg-error-manager.js"></script>
 <script src="engine_flow.js"></script>
 <script src="translate_code.js"></script>
 <script src="main.js"></script>

@@ -12,6 +12,7 @@ body{
 	width:100%;
 	height: 100%;
 }
+
 #msg-alert{
 	position: fixed;
 	bottom: 10px;
@@ -23,6 +24,7 @@ body{
 	border-radius: 10px;
 	left: calc( 50% - 300px);
 }
+
 #main-container{
 	width: 100%;
 	/*margin-left: calc(50% - 410px);*/
@@ -41,8 +43,8 @@ body{
 	margin-left: 20px;
 	margin-top: 5px;
 }
+
 .bt-menu{
-	
 	width: 40px;
 	height: calc(100% - 10px);
 	float:left;
@@ -69,11 +71,11 @@ body{
 
 
 #bt-run{
-	background-image: url("../icon-bt-run.png");
+	background-image: url("../src/images/icon-bt-run.png");
 }
 
 #bt-code{
-	background-image: url("../icon-bt-code.png");
+	background-image: url("../src/images/icon-bt-code.png");
 }
 
 #container-user-menu{
@@ -87,15 +89,24 @@ body{
 	float:right;
 	margin-left: 10px;
 }
+
 #container-msg-menu{
 	float:left;
 	margin-left: 10px;
 	position: relative;
 	top: 15px;
 	color: #999;
-	width: 600px;
-	
+	width: 50%;
+	height: 30px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
+
+#msg-save{
+	width: 50%;
+	font-size:  1em;
+}
+
 
 #title-project{
 	color: #000;
@@ -107,6 +118,7 @@ body{
 	border-radius: 5px;
 	padding-left: 1px;	
 }
+
 #title-project:hover{
 	border: solid 2px #aaa;
 }
@@ -117,7 +129,7 @@ body{
 }
 #profile-user-menu{
 	background-color: #eee;
-	background-image: url("../profile.png");
+	background-image: url("../src/images/profile.png");
 	background-size: 100%;
 	width: 40px;
 	height: 40px;
@@ -285,59 +297,59 @@ body{
 }
 
 #bt-new-block{
-	background-image: url("../icon_createnew.png");	
+	background-image: url("../src/images/icon_createnew.png");	
 }
 
 
 #bt-connect-link{
-	background-image: url("../icon_connectline.png");	
+	background-image: url("../src/images/icon_connectline.png");	
 }
 
 
 #bt-connect-block{
-	background-image: url("../icon_connectblock.png");	
+	background-image: url("../src/images/icon_connectblock.png");	
 }
 
 #bt-delete-link{
-	background-image: url("../icon_deletelink.png");	
+	background-image: url("../src/images/icon_deletelink.png");	
 }
 
 
 #bt-delete-block{
-	background-image: url("../icon_deleteblock.png");	
+	background-image: url("../src/images/icon_deleteblock.png");	
 }
 
 
 #bt-new-process{
-	background-image: url("../icon_createnewprocess.png");	
+	background-image: url("../src/images/icon_createnewprocess.png");	
 }
 
 
 #bt-new-decision{
-	background-image: url("../icon_createnewdecision.png");	
+	background-image: url("../src/images/icon_createnewdecision.png");	
 }
 
 
 #bt-new-conection{
-	background-image: url("../icon_createnewconection.png");	
+	background-image: url("../src/images/icon_createnewconection.png");	
 }
 
 #bt-new-end{
-	background-image: url("../icon_createnewend.png");	
+	background-image: url("../src/images/icon_createnewend.png");	
 }
 
 #bt-new-start{
-	background-image: url("../icon_createnewstart.png");	
+	background-image: url("../src/images/icon_createnewstart.png");	
 }
 
 
 #bt-new-input{
-	background-image: url("../icon_createnewinput.png");	
+	background-image: url("../src/images/icon_createnewinput.png");	
 }
 
 
 #bt-new-output{
-	background-image: url("../icon_createnewoutput.png");	
+	background-image: url("../src/images/icon_createnewoutput.png");	
 }
 
 .bt-zoom{
@@ -359,7 +371,7 @@ body{
 	position: absolute;
 	bottom: 40px;
 	right: 40px;
-	background-image: url("../bt-zoom-in.png");
+	background-image: url("../src/images/bt-zoom-in.png");
 
 }
 
@@ -367,7 +379,47 @@ body{
 	position: absolute;
 	bottom: 40px;
 	right: 100px;
-	background-image: url("../bt-zoom-out.png");
+	background-image: url("../src/images/bt-zoom-out.png");
+}
+
+
+#msg-for-user{
+	position: fixed;
+	bottom: 20px;
+	left: calc(50% - 100px); 
+	display: none;
 	
-	
+}
+
+#msg-for-user #container-text-msg-for-user{
+	background-color: #1A6666;
+	color: #fff;
+	border-radius: 10px;	
+	padding: 10px;
+	text-align: center;
+	min-width: 200px;
+}
+
+#msg-for-user #close-msg-for-user{
+	background-color: #FFF;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	box-shadow: 2px 4px 5px grey;
+	position: relative;
+	left: calc( 100% - 10px);
+}
+
+#msg-for-user #close-msg-for-user:hover{
+	cursor:pointer;
+}
+
+
+#tip-msg-for-user{
+	text-decoration: underline;
+}
+
+#tip-msg-for-user:hover{
+	cursor:pointer;
+	color: #108B93;
 }

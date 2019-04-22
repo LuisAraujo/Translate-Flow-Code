@@ -24,6 +24,11 @@ const BT_NEW_BLOCK_END = $("#bt-new-end");
 const canvas = document.getElementById("canv-flow");
 const ctx = canvas.getContext("2d");
 
+const MSG_CONTAINER_ERRO = $("#msg-for-user");
+const MSG_TEXT_ERRO = $("#text-msg-for-user");
+const MSG_TIP_ERRO = $("#tip-msg-for-user");
+
+
 
 ef = new EngineFlow();
 ef.start();
@@ -131,4 +136,7 @@ canvas.addEventListener("mousemove", function(evt){
 canvas.addEventListener('dblclick', function (evt) {
 	alert("test double click");
 });
-	
+
+
+//ADD EVENTS
+

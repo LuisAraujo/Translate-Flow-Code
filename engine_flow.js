@@ -1,4 +1,5 @@
-EngineFlow = function(){	
+EngineFlow = function(){
+	this.msgerrosmanager = new MsgErroManager();	
 	this.debug = false;
 	this.linkingblocks = false;
 	this.selectedBlock;	
@@ -96,7 +97,8 @@ EngineFlow = function(){
 	 BT_NEW_BLOCK_PROCESS.click(function(){
 			SUB_MENU_BTICONS.hide();
 		   if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
+				//alert("Choise a block!");
 				return;
 			}
 			
@@ -111,7 +113,7 @@ EngineFlow = function(){
 	 BT_NEW_BLOCK_DECISION.click(function(){
 		 SUB_MENU_BTICONS.hide();
 		 if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
 				return;
 			}
 			var p = new Decision(0,0, ctx, "/* code */");
@@ -125,7 +127,7 @@ EngineFlow = function(){
 	 BT_NEW_BLOCK_INPUT.click(function(){
 		 SUB_MENU_BTICONS.hide();
 		 if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
 				return;
 			}
 			var p = new Process(100,200, ctx, "/ * your command here* /");
@@ -137,7 +139,7 @@ EngineFlow = function(){
 	 BT_NEW_BLOCK_OUTPUT.click(function(){
 		 SUB_MENU_BTICONS.hide();
 		 if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
 				return;
 			}
 			var p = new Process(100,200, ctx, "/ * your command here* /");
@@ -148,7 +150,7 @@ EngineFlow = function(){
 	BT_NEW_BLOCK_CONNECT.click(function(){
 		 SUB_MENU_BTICONS.hide();
 		 if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
 				return;
 			}
 			p = new Conection(0,0, ctx, "");
@@ -168,7 +170,8 @@ EngineFlow = function(){
 	 BT_NEW_BLOCK_END.click(function(){
 		 SUB_MENU_BTICONS.hide();
 		 if(_this.selectedBlock == null){
-				alert("Choise a block!");
+				_this.msgerrosmanager.showMessage("no-selected-block");
+				//alert("Choise a block!");
 				return;
 			}
 			var p = new  StartEnd(canvas.width/2,canvas.height- 100, ctx, "End")

@@ -1,8 +1,0 @@
-var = "var $name = $value"
-cond = "if($cond){/*code*/}"
-loop = "for($attr; $cond; $inc){/*code*/}"
-loop2 = "while($cond){/*code*/}"
-loop2 = "do{/*code*/}while($cond)"
-func = "$fun($varargs)"
-print = "console.log($value)"
-read = ""

@@ -28,18 +28,16 @@ Decision.prototype.printBlock = function(){
 	
 	this.ctx.beginPath();
 	this.ctx.moveTo(this.x - this.m/4, this.y+this.h/2);
-	
 	this.ctx.lineTo(this.x+this.w/2 + this.m/4 , this.y+this.h);
-	
 	this.ctx.lineTo(this.x + this.w + this.m/2 , this.y+this.h/2);
-	
 	this.ctx.lineTo(this.x+this.w/2 + this.m/4 , this.y);
-	
 	this.ctx.closePath(); 
+	
 	this.ctx.fill();
 	this.ctx.stroke();
-	this.ctx.fillText("no", this.x - this.m/4 - this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
-	this.ctx.fillText("yes", this.x + this.w + this.m/2 + this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
+	ctx.fillStyle = "#000";
+	this.ctx.fillText("yes", this.x - this.m/4 - this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
+	this.ctx.fillText("no", this.x + this.w + this.m/2 + this.ctx.measureText("no").width,  this.y+this.h/2 - 10);
 	
 }
 
