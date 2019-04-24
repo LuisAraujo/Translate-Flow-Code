@@ -13,11 +13,12 @@ Block = function(x, y, ctx, command){
 	this.double_selected = false;
 	this.moving = false;
 	this.links = new Array();
-	
 	this.type= "";
 	
 }
+
 Block.prototype.propText = 1;
+Block.prototype.commandchanged = false;
 
 
 Block.prototype.printRegular = function(){
@@ -81,7 +82,7 @@ Block.prototype.printDoubleSelected = function(){
 	this.ctx.fillStyle = "white";
 	this.ctx.lineWidth = "2";
 	this.printBlock();
-	//this.printText();
+	this.printText();
 	this.printLinks();
 }
 
@@ -129,6 +130,11 @@ Block.prototype.updateCommand = function(command){
 	this.command = command;
 	this.resizeBlock();
 }
+
+Block.prototype.getCommand = function(command){
+		return this.command;
+
+}
 	
 Block.prototype.resizeBlock = function(){
 	console.log(this.propText, this.w, parseInt(this.ctx.measureText(this.command).width * this.propText))
@@ -173,4 +179,12 @@ Block.prototype.setInitialState = function(){
 	this.moving = false;
 	this.selected = false;
 	this.double_selected = false;
+}
+
+Block.prototype.setCommandChanged = function(changed){
+	this.commandchanged = changed;
+}
+
+Block.prototype.getCommandChanged = function(){
+	return this.commandchanged;
 }

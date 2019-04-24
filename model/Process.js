@@ -27,8 +27,8 @@ Process.prototype.printBlock = function(){
 	 
 }
 
-Process.prototype.printText = function(){
-    this.ctx.fillStyle = "#0056E0";
+Process.prototype.printText = function(color){
+    this.ctx.fillStyle = color != undefined?color:"#0056E0";
 	ctx.textAlign = "center";
 	this.ctx.fillText(this.command, this.x + this.m + this.w/2  ,this.y + this.h/2);
 }

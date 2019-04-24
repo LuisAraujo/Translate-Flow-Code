@@ -38,6 +38,36 @@ window.onkeydown = function(e){
 	
 	if(e.key == "Control")
 		ef.downCtrl();
+	
+	else if ( (ef.selectedBlock != null) && (ef.selectedBlock.double_selected != false)){
+		
+		//backspace, space, =, + , -, *, / , %
+		if ( (event.keyCode == 8) || (event.keyCode == 32) || (event.key == "=") ||
+			 (event.key == "+") || (event.key == "-") || (event.key == "*") || 	
+			 (event.key == "/") || (event.key == "%") ||  	(event.key == "(") ||
+			 (event.key == ")") || (event.key == "[") || (event.key == "]") ||
+			 (event.key == "&") || (event.key == "|") ||
+		     //letras e numeros
+		    (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 65 && event.keyCode <= 90) )
+		    {
+				if(ef.selectedBlock.getCommandChanged() == false)
+				{
+					ef.selectedBlock.updateCommand(e.key);
+					ef.selectedBlock.setCommandChanged(true);
+				
+				}else
+				{
+					//space
+					if(event.keyCode == 32)
+						ef.selectedBlock.updateCommand(ef.selectedBlock.getCommand() + " ");
+					//backspace
+					else if(event.keyCode == 8)
+						ef.selectedBlock.updateCommand( ef.selectedBlock.getCommand().slice(0, ef.selectedBlock.getCommand().length-1) );
+					else
+						ef.selectedBlock.updateCommand(ef.selectedBlock.getCommand() + e.key);
+				}
+		}
+	}
 }
 
 window.onkeyup = function(e){
