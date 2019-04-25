@@ -48,7 +48,7 @@ Block.prototype.printLinks = function(color){
 		
 		var x_start = this.x + this.w/2 + this.m/2;
 		var y_start = this.y+this.h;
-		var x_end = this.links[0].x + this.links[0].w/2 + this.m/2;
+		var x_end = this.links[0].x + this.links[0].w/2 + this.m/4 - 2;
 		var y_end =  this.links[0].y;
 		var y_middle = y_start + (y_end - y_start) / 2; //y_start * 1.5;
 		
@@ -137,7 +137,6 @@ Block.prototype.getCommand = function(command){
 }
 	
 Block.prototype.resizeBlock = function(){
-	console.log(this.propText, this.w, parseInt(this.ctx.measureText(this.command).width * this.propText))
 	this.w = parseInt(this.ctx.measureText(this.command).width * this.propText);
 }
 

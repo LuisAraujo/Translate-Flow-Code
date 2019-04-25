@@ -13,8 +13,6 @@ Process = function(x, y, ctx, command){
 	this.moving = false;
 	this.links = [];
 	this.type = "process";
-	
-	
 }
 
 herda(Block, Process);

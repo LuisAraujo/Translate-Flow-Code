@@ -1,5 +1,6 @@
 EngineFlow = function(){
-	this.msgerrosmanager = new MsgErroManager();	
+	this.msgerrosmanager = new MsgErroManager();
+	this.translate = new TranslateCode();	
 	this.debug = false;
 	this.linkingblocks = false;
 	this.selectedBlock;	
@@ -8,6 +9,7 @@ EngineFlow = function(){
 	this.wsize = parseInt($("#container-canvas").css("width").substring(0,$("#container-canvas").css("width").length-2));
 	this.hsize = parseInt($("#container-canvas").css("height").substring(0,$("#container-canvas").css("height").length-2));
 	this.lastBlock_y = 0; 
+	
 }
 
 EngineFlow.prototype.upCtrl = function(){
@@ -64,63 +66,16 @@ EngineFlow.prototype.setDataInMenu = function(){
 	});
 }
 
-
-EngineFlow.prototype.getCommands = function(){
+EngineFlow.prototype.runCode = function(){
+	var commandstranlated = this.translate.getCommands(this.stackBlock);
+	var codejs = this.translate.translateToCode(commandstranlated, "javascrip");
+	eval(codejs + "\n start();");
 	
-	var textCommands = "";
-	var i = 0;
-	var tempStackBlock = [];
-	for(var j=0; j< this.stackBlock.length; j++)
-		tempStackBlock[j]  = this.stackBlock[j];
-	
-	while(tempStackBlock.length != 0){
-		var command = tempStackBlock.shift();
-		textCommands += command.getType()+":";
-		textCommands += command.command+"\n"; 
-		
-		
-		if(command.getType() == "decision"){
-			textCommands += "[\n"
-			if(command.linkyes!=null){
-				textCommands += "yes:[";
-				var command2 =  command.linkyes;
-				
-				while( (command2 != undefined) && ( command2 != null )){
- 
-					textCommands += command2.getType()+":";
-					textCommands += command2.command; 
-					
-					for( var i = 0; i < tempStackBlock.length; i++){ 
-						if ( tempStackBlock[i] ===  command2) {
-						 tempStackBlock.splice(i, 1); 
-						}
-					}
-					command2 =  command2.linkyes; 
-				};
-				textCommands += "]\n";
-			}
-			
-			if(command.linkno!=null){
-				textCommands += "no:[";
-				var command2 =  command.linkno;
-				while( (command2 != undefined) && ( command2 != null )){
-					
-					textCommands += command2.getType()+":";
-					textCommands += command2.command; 
-					
-					for( var i = 0; i < tempStackBlock.length; i++){ 
-						if ( tempStackBlock[i] ===  command2) {
-						 tempStackBlock.splice(i, 1); 
-						}
-					}
-					command2 =  command2.linkno;
-				};
-				
-				textCommands += "]\n";
-			}
-			textCommands += "]\n";
-		}
-	};
+}
+EngineFlow.prototype.translateCode = function(){
+	var commandstranlated = this.translate.getCommands(this.stackBlock);
+	var codejs = this.translate.translateToCode(commandstranlated, "javascrip");
+	console.log(codejs);
 	
 }
 

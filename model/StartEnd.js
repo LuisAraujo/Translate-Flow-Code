@@ -30,7 +30,7 @@ StartEnd.prototype.printBlock = function(){
 StartEnd.prototype.printText = function(){
     this.ctx.fillStyle = "#0056E0";
 	this.ctx.textAlign = "center";
-	this.ctx.fillText(this.command, this.x + this.m/2 + this.w/2  ,this.y + this.h/2);
+	this.ctx.fillText(this.command.toUpperCase(), this.x + this.m/2 + this.w/2  ,this.y + this.h/2);
 }
 
 StartEnd.prototype.printColider = function(){

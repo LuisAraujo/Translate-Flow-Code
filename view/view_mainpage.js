@@ -1,8 +1,15 @@
 const COLOR = new Object();
 COLOR.line_block = "black";
+//main menu
+const BT_NEW = $("#bt-new");
+const BT_OPEN = $("#bt-open");
+const BT_EXPORT = $("#bt-export");
+const BT_RUN = $("#bt-run");
+const BT_CODE = $("#bt-code");
 
 const BT_NEW_BLOCK = $("#bt-new-block");
 const BT_NEW_CLINK = $("#bt-connect-link");
+
 //const BT_NEW_CBLOCK = $("#bt-connect-block");
 const BT_DEL_LINK = $("#bt-delete-link");
 const BT_DEL_BLOCK = $("#bt-delete-block");
@@ -11,6 +18,7 @@ const BT_UPDATE_BLOCK = $("#bt-updateblock");
 const SUB_MENU_BTICONS = $("#submenu-icons");
 const BT_ZOOM_IN = $("#bt-zoom-in");
 const BT_ZOOM_OUT = $("#bt-zoom-out");
+
 /*BUTTONS FOR CREATE BLOCKS*/
 const BT_NEW_BLOCK_PROCESS = $("#bt-new-process");
 const BT_NEW_BLOCK_DECISION = $("#bt-new-decision");
@@ -46,7 +54,8 @@ window.onkeydown = function(e){
 			 (event.key == "+") || (event.key == "-") || (event.key == "*") || 	
 			 (event.key == "/") || (event.key == "%") ||  	(event.key == "(") ||
 			 (event.key == ")") || (event.key == "[") || (event.key == "]") ||
-			 (event.key == "&") || (event.key == "|") ||
+			 (event.key == "&") || (event.key == "|") || (event.key == "\"") ||
+			 (event.key == "<") || (event.key == ">") ||
 		     //letras e numeros
 		    (event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 65 && event.keyCode <= 90) )
 		    {
@@ -79,6 +88,12 @@ window.onresize = function(){
 	ef.resizeCanvas();
 };
 
+BT_CODE.click(function(){
+	ef.translateCode();
+});
+BT_RUN.click(function(){
+	ef.runCode();
+});
 BT_ZOOM_IN.click(function(){
 	ef.zoomCanvas(1.1);
 });
@@ -176,7 +191,7 @@ BT_DEL_LINK.click(function(){
 			ef.msgerrosmanager.showMessage("no-selected-block", true);
 			return;
 		}
-		var p = new Process(100,200, ctx, "/ * your command here* /");
+		var p = new InOutput(100,200, ctx, "input");
 		
 		ef.selectedBlock.addLink(p);
 		ef.addBlock(p);
@@ -188,7 +203,7 @@ BT_DEL_LINK.click(function(){
 			ef.msgerrosmanager.showMessage("no-selected-block", true);
 			return;
 		}
-		var p = new Process(100,200, ctx, "/ * your command here* /");
+		var p = new InOutput(100,200, ctx, "output");
 		ef.selectedBlock.addLink(p);
 		ef.addBlock(p);
 });
