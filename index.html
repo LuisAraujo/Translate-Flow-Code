@@ -5,6 +5,20 @@
  <link rel="icon" href="src/images/logo2.png" sizes="16x16" type="image/png"> 
 </head>
 <body>
+<div id="modal-export-file">
+	<input value="my-file-name" id ="inp-name-export-file" placeholder="File Name"/>
+
+	<div id="container-option-format-file">
+		<span>Format</span>
+		<select id="format-file-export">
+			<option value="png">PNG</option>
+			<option value="jpg">JPG</option>
+		</select>
+	</div>
+	<a href="#"  class="button" id="btn-download" download="my-file-name.jpg">Download</a>
+</div>
+
+
 <div id="sup-menu">
 	<image src="src/images/logo.png" id="logo-menu">
 	<div id="container-bts-menu">
@@ -59,6 +73,9 @@
 		<div class="bt-zoom" id="bt-zoom-out"></div>
 	
 		<canvas id="canv-flow"> </canvas>
+		
+		 <img src="" id="canv-mirror" class="canv-mirror"  />
+		 
 	</div>
 
 </div>
@@ -74,6 +91,10 @@
 		<a id="tip-msg-for-user">Get a tip</a>!
 	</span>
 </div>
+
+
+
+
 
 <script src="src/jquery-3.2.1.min.js"></script>
 

@@ -95,5 +95,15 @@ EngineFlow.prototype.resizeCanvas = function(){
 		
 	}else if(this.lastBlock_y > canvas.height)
 	    canvas.height =  lastBlock_y + 100;
+
+
+
+	canvas_img.height = canvas.height;
+	canvas_img.width = canvas.width;
+
 }
 
+EngineFlow.prototype.exportPng = function(){
+	var dataURL = canvas.toDataURL('image/png');
+	canvas_img.src = dataURL;
+}

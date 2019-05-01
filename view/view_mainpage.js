@@ -28,9 +28,12 @@ const BT_NEW_BLOCK_CONNECT= $("#bt-new-conection");
 const BT_NEW_BLOCK_START = $("#bt-new-start");
 const BT_NEW_BLOCK_END = $("#bt-new-end");
 
+const BT_EXPORT_FILE = $('#btn-download');
+const MODAL_EXPORT_FILE = $("#modal-export-file");
 
 const canvas = document.getElementById("canv-flow");
 const ctx = canvas.getContext("2d");
+const canvas_img = document.getElementById("canv-mirror");
 
 const MSG_ERRO = $("#msg-for-user");
 const MSG_TEXT_ERRO = $("#text-msg-for-user");
@@ -88,7 +91,10 @@ window.onkeyup = function(e){
 
 window.onresize = function(){
 	ef.resizeCanvas();
+	
 };
+
+
 
 BT_CODE.click(function(){
 	ef.translateCode();
@@ -96,6 +102,26 @@ BT_CODE.click(function(){
 BT_RUN.click(function(){
 	ef.runCode();
 });
+
+
+
+BT_EXPORT.click(function(){
+	
+	var dataURL = canvas.toDataURL('image/png');
+    BT_EXPORT_FILE.attr("href", dataURL);
+	MODAL_EXPORT_FILE.show();
+	//ef.exportPng();
+});
+
+BT_EXPORT_FILE.click(function(){
+	var name = $("#inp-name-export-file").val();
+	if(name == "")
+		name = "myflow";
+	var extession = $("#format-file-export").children("option:selected").val();
+	BT_EXPORT_FILE.attr("download", name+"."+extession);
+	MODAL_EXPORT_FILE.hide();
+});
+
 BT_ZOOM_IN.click(function(){
 	ef.zoomCanvas(1.1);
 });
