@@ -94,7 +94,15 @@ TranslateCode.prototype.translateToCode = function(commands, language){
 		else if(currentcode[0] == "process")
 			code += currentcode[1]+";";
 		else if(currentcode[0] == "input"){
-			code += currentcode[1]+" = prompt('');";
+			code += currentcode[1] + " = prompt('');";
+			
+			code += "if(!isNaN("+currentcode[1]+")){";
+			code +=  "if(" + currentcode[1] + ".indexOf(\".\") !== -1){";
+			code += currentcode[1]+" =  parseFloat( " + currentcode[1] + " );}";
+			code +=  "else{"
+			code += currentcode[1]+" =  parseInt ( " + currentcode[1] + ");} }";
+			//boolean 
+			
 		}else if(currentcode[0] == "output"){
 			code += "alert("+currentcode[1]+");";
 		}
@@ -103,6 +111,7 @@ TranslateCode.prototype.translateToCode = function(commands, language){
 		code += "\n";
 	}
 	
+	console.log(code);
 	return code;
 }
 

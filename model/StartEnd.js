@@ -52,6 +52,6 @@ Block.prototype.click = function(x, y){
 
 
 StartEnd.prototype.updateCommand = function(command){
-	alert("Do not is possible change start and end command");
+	ef.msgerrosmanager.showMessage("Do not is possible change start and end command", true);
 }
 	
