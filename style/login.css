@@ -1,0 +1,107 @@
+@font-face {
+  font-family: sosa;
+  src: url(../src/fonts/sosa.eot);
+}
+
+@font-face {
+  font-family: fb-faces;
+  src: url(../src/fonts/facebook-letter-faces.otf);
+}
+
+body{
+	background-color: #eee;
+	font-family: fb-faces;
+}
+
+#conatiner-logo{
+	width: 150px;
+	height: 150px;
+	margin-left: calc(50% - 50px);
+	margin-top: 50px;
+}
+
+#container-login{
+	width: 250px;
+	height: 200px;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: #fff;
+	margin-left: calc(50% - 175px);
+	margin-top: 10px;
+	box-shadow: 5px 5px 10px #aaa;
+}
+
+
+#container-logo-img{
+	height: 100%;
+}
+
+.conatiner-inputs{
+	width: calc(100% - 10px);
+	border: 1px solid #ddd;
+	margin-top: 10px;
+	border-radius: 5px;
+	padding: 5px;
+}
+.conatiner-inputs input{
+	width: calc( 100% - 36px);
+	border:none;
+	outline: none;
+	font-size: 20px;
+	display: inline;
+}
+.conatiner-inputs .icon{
+	width: 25px;
+	height:25px;
+	display: block;
+	float:left;
+	margin-right: 5px;
+}
+
+#icon-email{
+	background-size: cover;
+	background-image: url("../src/images/user.png");
+}
+
+#icon-pass{
+	background-size: cover;
+	background-image: url("../src/images/pass.png");
+}
+
+#bt-login{
+	margin-top: 30px;
+	display: block;
+	width: calc(100% - 2px);
+	height: 40px;
+	background-color: #108B93;
+	border-radius: 10px;
+	border: solid 1px #11B8BC;
+	margin-bottom: 5px;
+	background-size: contain;
+	font-size: 30px;
+	text-align: center;
+	color: #fff;
+	text-decoration: none;
+	
+}
+
+#bt-login:hover{
+	background-color: #11B8BC;
+	cursor: pointer;
+}
+
+#bt-forgotpass{
+	width: 100%;
+	display:block;
+	color: #108B93;
+	text-align: center;
+}
+
+#bt-forgotpass:hover{
+	color: #11B8BC;
+	cursor: pointer;
+}
+
+#container-forgot{
+	width: 100%;
+}

@@ -1,117 +1,30 @@
 <html>
 <head>
- <link rel="stylesheet" href="style/engine_flow.css">
+ <link rel="stylesheet" href="style/login.css">
  <title>Translate Flow Code v0.1</title>
  <link rel="icon" href="src/images/logo2.png" sizes="16x16" type="image/png"> 
 </head>
 <body>
-<div id="modal-export-file">
-	<input value="my-file-name" id ="inp-name-export-file" placeholder="File Name"/>
 
-	<div id="container-option-format-file">
-		<span>Format</span>
-		<select id="format-file-export">
-			<option value="png">PNG</option>
-			<option value="jpg">JPG</option>
-		</select>
+	<div id="conatiner-logo">
+		<img id="container-logo-img" src="src/images/logo.png">
 	</div>
-	<a href="#"  class="button" id="btn-download" download="my-file-name.jpg">Download</a>
-</div>
-
-
-<div id="sup-menu">
-	<image src="src/images/logo.png" id="logo-menu">
-	<div id="container-bts-menu">
-		<div class="bt-menu" id="bt-new" title="New Flow" >
+	<div id="container-login">
+		<div class="conatiner-inputs" id="conatiner-email">
+			<span  id="icon-email" class="icon"></span>
+			<input id="inp-email" placeholder="your nick or email"/>
 		</div>
-		<div class="bt-menu" id="bt-open" title="Open a Flow" >
+		<div  class="conatiner-inputs" id="conatiner-password">
+			<span id="icon-pass" class="icon"></span>
+			<input id="inp-password" placeholder="your password" type="password" />
 		</div>
-		<div class="bt-menu" id="bt-export" title="Export as PNG" >
+		<div id="bt-login">
+			<span>Login</span>
 		</div>
-		<div class="bt-menu" id="bt-run" title="Run Code" >
-		</div>
-		<div class="bt-menu" id="bt-code" title="Gerate code by FlowChart" >
-		</div>
+		<div id="container-forgot"><a id="bt-forgotpass" >Hey, I forgot my password</a></div>
 	</div>
-	<div id="container-msg-menu">
-		<input id="title-project" value="Atividade numero 01 - Lista 1">
-		<span id="msg-save">
-			Todas as alteração foram salvas.
-		</span>
-	</div>
-	<div id="container-user-menu">
-		<div id="name-user-menu">Luis4raujo</div>
-		<div id="profile-user-menu">
-			
-		</div>
-	</div>
-</div>
-
-<div id="main-container">
-	
-	<div id="menu-icons" >
-		   <div id="submenu-icons" style="width: 100%" >
-				<div class="bt-submenu-icons" id="bt-new-process" title="Create a new process-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-decision" title="Create a new decision-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-input" title="Create a new input-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-output" title="Create a new output-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-conection" title="Create a new connection-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-start" title="Create a new start-block" ></div>
-				<div class="bt-submenu-icons" id="bt-new-end" title="Create a new end-block" ></div>
-			</div>	
-			
-		<div class="bt-menu-icons" id="bt-new-block" title="Create a new block" ></div>
-		<div class="bt-menu-icons" id="bt-connect-link"></div>
-		<!-- <div class="bt-menu-icons" id="bt-connect-block"></div> -->
-		<div class="bt-menu-icons" id="bt-delete-link"></div>
-		<div class="bt-menu-icons" id="bt-delete-block"></div>
-	</div>
-	
-	
-	<div id="container-canvas">
-		<div class="bt-zoom" id="bt-zoom-in"></div>
-		<div class="bt-zoom" id="bt-zoom-out"></div>
-	
-		<canvas id="canv-flow"> </canvas>
-		
-		 <img src="" id="canv-mirror" class="canv-mirror"  />
-		 
-	</div>
-
-</div>
-<!--
-<div id="msg-alert">
-	Pressione <b>Ctrl</b> para mover o bloco
-</div>
--->
-<div id="msg-for-user">
-	<div id="close-msg-for-user"></div>
-	<span id="container-text-msg-for-user">
-		<span id="text-msg-for-user">You must select a block. </span>
-		<a id="tip-msg-for-user">Get a tip</a>!
-	</span>
-</div>
-
-
-
-
-
-<script src="src/jquery-3.2.1.min.js"></script>
-
-<script src="src/RectRounded.js"></script>
-<script src="src/Util.js"></script>
-<script src="model/CButton.js"></script>
-<script src="model/Block.js"></script>
-<script src="model/Conection.js"></script>
-<script src="model/StartEnd.js"></script>
-<script src="model/Decision.js"></script>
-<script src="model/Process.js"></script>
-<script src="model/InOutput.js"></script>
-<script src="contoller/msg-error-manager.js"></script>
-<script src="contoller/engine_flow.js"></script>
-<script src="contoller/translate_code.js"></script>
-<script src="view/view_mainpage.js"></script>
-
 </body>
 
-</html>
+<script src="src/jquery-3.2.1.min.js"></script>
+<script src="view/view_login.js"></script>
+<html>
