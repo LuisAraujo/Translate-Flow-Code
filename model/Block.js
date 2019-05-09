@@ -62,6 +62,8 @@ Block.prototype.printLinks = function(color){
 		//this.ctx.closePath();
 		
 		this.ctx.stroke();
+		
+		this.ctx.drawImage(ef.direction, x_end - 5, y_end - 10, 10, 10);
 	//}
 }
 

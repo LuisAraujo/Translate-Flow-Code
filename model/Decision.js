@@ -63,6 +63,7 @@ Decision.prototype.printLinks = function(color){
 		this.ctx.lineTo(this.linkyes.x + this.linkyes.w/2 + this.m/2, this.linkyes.y);
 		this.ctx.closePath();
 		this.ctx.stroke();
+		this.ctx.drawImage(ef.direction,(this.linkyes.x + this.linkyes.w/2 + this.m/2) - 5,this.linkyes.y - 10, 10, 10);
 	}
 	
 	if(this.linkno != null){
@@ -76,6 +77,7 @@ Decision.prototype.printLinks = function(color){
 		this.ctx.lineTo(this.linkno.x + this.linkno.w/2 + this.m/2, this.linkno.y);
 		this.ctx.closePath();
 		this.ctx.stroke();
+		this.ctx.drawImage(ef.direction,(this.linkno.x + this.linkno.w/2 + this.m/2) - 5,this.linkno.y - 10, 10, 10);
 	}
 }
 

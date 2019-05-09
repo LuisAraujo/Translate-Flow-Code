@@ -8,7 +8,9 @@ EngineFlow = function(){
 	this.ctrl = false;
 	this.wsize = parseInt($("#container-canvas").css("width").substring(0,$("#container-canvas").css("width").length-2));
 	this.hsize = parseInt($("#container-canvas").css("height").substring(0,$("#container-canvas").css("height").length-2));
-	this.lastBlock_y = 0; 
+	this.lastBlock_y = 0;
+	this.direction = new Image(5, 5);
+		this.direction.src = "src/images/direction.png";
 	
 }
 
