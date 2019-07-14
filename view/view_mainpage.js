@@ -176,7 +176,7 @@ BT_DEL_LINK.click(function(){
 		ef.msgerrosmanager.showMessage("no-selected-block", true);
 		return;
 	}
-	ef.msgerrosmanager.showMessage("selected-block");
+	ef.msgerrosmanager.showMessage("select-block", false);
 	ef.linkingblocks = true;
  });
  
@@ -208,6 +208,7 @@ BT_DEL_LINK.click(function(){
 		var p = new Decision(0,0, ctx, "/* code */");
 		p.y = ef.selectedBlock.y + ef.selectedBlock.h + 20;
 		p.x = ef.selectedBlock.x + ef.selectedBlock.w/2 - p.w/2 ;
+		p.havelinktome++;
 		
 		ef.selectedBlock.addLink(p);
 		ef.addBlock(p);
@@ -310,7 +311,23 @@ canvas.addEventListener('mousedown', function (evt) {
 			if( (ef.linkingblocks) && (old_selectedBlock != null)) {
 			
 				ef.selectedBlock = arrayBlocks[i];
-				old_selectedBlock.addLink(ef.selectedBlock);
+				if(ef.selectedBlock.type == "decision"){
+					if(ef.selectedBlock.havelinktome == 1){
+						ef.selectedBlock.type = "loop";
+						ef.selectedBlock.havelinktome = 2;
+						old_selectedBlock.addLink(ef.selectedBlock);
+					
+					}else if(ef.selectedBlock.havelinktome == 0){
+						
+						ef.selectedBlock.havelinktome = 1;
+						old_selectedBlock.addLink(ef.selectedBlock);
+					
+					}else {
+						ef.msgerrosmanager.showMessage("max-link");
+					}
+				}else{
+					old_selectedBlock.addLink(ef.selectedBlock);	
+				}
 				
 				ef.linkingblocks = false;
 				

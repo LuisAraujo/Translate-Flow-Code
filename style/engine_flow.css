@@ -414,7 +414,7 @@ body{
 }
 
 #msg-for-user #container-text-msg-for-user{
-	background-color: #1A6666;
+	background-color: #1A6666;	
 	color: #fff;
 	border-radius: 10px;	
 	padding: 10px;
@@ -422,9 +422,10 @@ body{
 	min-width: 200px;
 }
 
-.msg-error{
-	background-color: #bc1123 !important;	
+#msg-for-user .msg-error{
+	background-color: #a81919 !important;	
 }
+
 
 
 #msg-for-user #close-msg-for-user{

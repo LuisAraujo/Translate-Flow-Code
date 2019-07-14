@@ -6,29 +6,34 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 	var textCommands = [];
 	var i = 0;
 	var tempStackBlock = [];
-	
+	//copia os comandos para um pilha temporária, afim de não afetar a pilha original
 	for(var j=0; j< stackBlock.length; j++)
 		tempStackBlock[j]  = stackBlock[j];
 	
+	//enquanto existir comandos na pilha
 	while(tempStackBlock.length != 0){
-		
+		//pega um comando
 		var command = tempStackBlock.shift();
-		
+		//guarda o tipo do comando 
 		textCommands.push(command.getType()+":");
+		//adiciona o comando propriamente
 		textCommands[textCommands.length-1] += command.command; 
 		
-		
-		if(command.getType() == "decision"){
-				textCommandsDecision = [2];
-				//yes
+		//em caso de ser uma decisão
+		if((command.getType() == "decision") || (command.getType() == "loop")){
+				textCommandsDecision = [4];
+				textCommandsDecision[0] = command.getType();
+				textCommandsDecision[1] = command.command;
+				//cria duas ramificações para o yes e o no
 				textYes = [];
-				//no
 				textNo = [];
 				
+			//se exitir comando no yes	
 			if(command.linkyes!=null){
 				
 				var command2 =  command.linkyes;
 				
+				//percorre todos os subcomandos
 				while( (command2 != undefined) && ( command2 != null )){
  
 					textYes.push(command2.getType()+":");
@@ -37,14 +42,17 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 					//busca na pilha de blocos o código dentro do if
 					for( var i = 0; i < tempStackBlock.length; i++){ 
 						if ( tempStackBlock[i] ===  command2) {
-						 //remove
+						 //remove pois já foi visitado
 						 tempStackBlock.splice(i, 1); 
 						}
 					}
+					
+					//caso tenha outra subdecisão
 					command2 =  command2.linkyes; 
 				};
 				
-				textCommandsDecision[0] = textYes;
+				//coloca o comando no vetor
+				textCommandsDecision[2] = textYes;
 				
 				
 			}
@@ -65,7 +73,7 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 					command2 =  command2.linkno;
 				};
 				
-				textCommandsDecision[1] = textNo;
+				textCommandsDecision[3] = textNo;
 			}
 			
 			textCommands[textCommands.length-1] = textCommandsDecision;
@@ -78,40 +86,75 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 	
 }
 
-
-TranslateCode.prototype.translateToCode = function(commands, language){
+/*Traduz o comando gerado pelo getCommands  em código javascript*/
+TranslateCode.prototype.translateToCode = function(commands, language, tab){
+	
 	var code = "";
 	var currentcode;
 	
-	for(i = 0; i<commands.length; i++){
+	for(var i = 0; i<commands.length; i++){
 		
-		currentcode = commands[i].split(":");
-		console.log(currentcode[0]);
-		if(currentcode[0] == "Start")
-			code += "function start(){";
-		else if(currentcode[0] == "End")
-			code += "}";
-		else if(currentcode[0] == "process")
-			code += currentcode[1]+";";
-		else if(currentcode[0] == "input"){
-			code += currentcode[1] + " = prompt('');";
+		
+		if(typeof commands[i] == "string"){
+			currentcode = commands[i].split(":");
 			
-			code += "if(!isNaN("+currentcode[1]+")){";
-			code +=  "if(" + currentcode[1] + ".indexOf(\".\") !== -1){";
-			code += currentcode[1]+" =  parseFloat( " + currentcode[1] + " );}";
-			code +=  "else{"
-			code += currentcode[1]+" =  parseInt ( " + currentcode[1] + ");} }";
-			//boolean 
+			if(currentcode[0] == "Start"){
+				code += tab+"function start(){";
+				tab+=" ";
 			
-		}else if(currentcode[0] == "output"){
-			code += "alert("+currentcode[1]+");";
+			}else if(currentcode[0] == "End")
+				code += tab+"\n}";
+			
+			else if(currentcode[0] == "process")
+				code += tab+currentcode[1]+";";
+			
+			else if(currentcode[0] == "input"){
+				code += tab+currentcode[1] + " = prompt('');";
+				//fazer conversão para numeros
+				code += tab+"if(!isNaN("+currentcode[1]+")){";
+				code +=  tab+"if(" + currentcode[1] + ".indexOf(\".\") !== -1){";
+				code += tab+currentcode[1]+" =  parseFloat( " + currentcode[1] + " );}";
+				code += tab+ "else{\n"
+				code += tab+currentcode[1]+" =  parseInt ( " + currentcode[1] + ");}}";
+				//boolean 
+				
+			}else if(currentcode[0] == "output"){
+				code += tab+"alert("+currentcode[1]+");";
+			}
+				
+			code += "\n";
+			
+		}else if(commands[i][0] == "decision"){
+			
+			if ((commands[i][2]!= undefined) && (commands[i][2].length > 0)){
+				code += tab+"if(" + commands[i][1] +"){ \n";
+				code += tab+this.translateToCode (commands[i][2], "", tab+" ");
+				code += tab+"}";
+			}
+			
+			if((commands[i][3]!= undefined) && (commands[i][3].length > 0)){
+				code += tab+"else{\n";
+				code += tab+this.translateToCode (commands[i][3], "", tab+" ");
+				code += tab+"}"
+			}
+			
+		}else if (commands[i][0] == "loop"){
+			
+			if ((commands[i][2]!= undefined) && (commands[i][2].length > 0)){
+				code += tab+"while(" + commands[i][1] +"){ \n";
+				code += tab+this.translateToCode (commands[i][2], "", tab+" ");
+				code += tab+"}";
+			}
+			
+			if((commands[i][3]!= undefined) && (commands[i][3].length > 0)){
+				code += tab+"\n";
+				code += tab+this.translateToCode (commands[i][3], "", tab+" ");
+
+			}
+			
 		}
-		
-		
-		code += "\n";
 	}
 	
-	console.log(code);
 	return code;
 }
 

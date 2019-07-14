@@ -16,6 +16,7 @@ Decision = function(x, y, ctx, command){
 	this.linkno = null;
 	this.wline = 60;
 	this.type = "decision";
+	this.havelinktome = 0;
 }
 
 herda(Block, Decision);

@@ -48,22 +48,32 @@ Block.prototype.printLinks = function(color){
 		
 		var x_start = this.x + this.w/2 + this.m/2;
 		var y_start = this.y+this.h;
+		var y_middle = 0;
+		var y_end =  0;
 		var x_end = this.links[0].x + this.links[0].w/2 + this.m/4 - 2;
-		var y_end =  this.links[0].y;
-		var y_middle = y_start + (y_end - y_start) / 2; //y_start * 1.5;
 		
+		//dependendo da posição do bloco, o link pode ser por baixo ou por cima		
+		if(this.y > this.links[0].y ){
 		
+			y_end =  this.links[0].y + this.links[0].h;
+			var y_middle = y_start + this.h + 20;
+			this.ctx.drawImage(ef.direction2, x_end - 5, y_end, 10, 10);
 		
-		//this.links[0].x + this.links[0].w/2 + this.m/2
+		}else{
+			y_end =  this.links[0].y;
+			var y_middle = y_start + (y_end - y_start) / 2;
+			this.ctx.drawImage(ef.direction, x_end - 5, y_end - 10, 10, 10);
+		}
+		
+
 		this.ctx.moveTo(x_start, y_start);
 		this.ctx.lineTo(x_start, y_middle);
 		this.ctx.lineTo(x_end, y_middle);
 		this.ctx.lineTo(x_end, y_end);
-		//this.ctx.closePath();
 		
 		this.ctx.stroke();
 		
-		this.ctx.drawImage(ef.direction, x_end - 5, y_end - 10, 10, 10);
+		
 	//}
 }
 

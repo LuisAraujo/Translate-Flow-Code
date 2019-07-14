@@ -10,7 +10,9 @@ EngineFlow = function(){
 	this.hsize = parseInt($("#container-canvas").css("height").substring(0,$("#container-canvas").css("height").length-2));
 	this.lastBlock_y = 0;
 	this.direction = new Image(5, 5);
-		this.direction.src = "src/images/direction.png";
+	this.direction2 = new Image(5, 5);
+	this.direction.src = "src/images/direction.png";
+	this.direction2.src = "src/images/direction2.png";
 	
 }
 
@@ -70,13 +72,14 @@ EngineFlow.prototype.setDataInMenu = function(){
 
 EngineFlow.prototype.runCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock);
-	var codejs = this.translate.translateToCode(commandstranlated, "javascrip");
-	eval(codejs + "\n start();");
+	var code = this.translate.translateToCode(commandstranlated, "javascrip", "");
+	eval(code + "\n start();");
+	console.log("/*gerated code:*/ \n" + code);
 	
 }
 EngineFlow.prototype.translateCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock);
-	var codejs = this.translate.translateToCode(commandstranlated, "javascrip");
+	var codejs = this.translate.translateToCode(commandstranlated, "javascrip", "");
 	console.log(codejs);
 	
 }
