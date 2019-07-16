@@ -21,6 +21,7 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 		
 		//em caso de ser uma decisão
 		if((command.getType() == "decision") || (command.getType() == "loop")){
+			
 				textCommandsDecision = [4];
 				textCommandsDecision[0] = command.getType();
 				textCommandsDecision[1] = command.command;
@@ -46,9 +47,13 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 						 tempStackBlock.splice(i, 1); 
 						}
 					}
-					
+					console.log(command2);
 					//caso tenha outra subdecisão
-					command2 =  command2.linkyes; 
+					if ((command2.links != undefined) && (command2.links.length > 0 ))
+						command2 =  command2.links[0];
+					else
+						command2 = null;
+					
 				};
 				
 				//coloca o comando no vetor
@@ -88,12 +93,11 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 
 /*Traduz o comando gerado pelo getCommands  em código javascript*/
 TranslateCode.prototype.translateToCode = function(commands, language, tab){
-	
+	//console.log(commands);
 	var code = "";
 	var currentcode;
 	
 	for(var i = 0; i<commands.length; i++){
-		
 		
 		if(typeof commands[i] == "string"){
 			currentcode = commands[i].split(":");

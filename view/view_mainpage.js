@@ -45,6 +45,8 @@ const MSG_CONTAINER_ERRO = $("#container-text-msg-for-user");
 ef = new EngineFlow();
 ef.start();
 
+eftest = new EngineFlowTest();
+eftest.caseTestLoop();
  
  
 window.onkeydown = function(e){
@@ -311,6 +313,7 @@ canvas.addEventListener('mousedown', function (evt) {
 			if( (ef.linkingblocks) && (old_selectedBlock != null)) {
 			
 				ef.selectedBlock = arrayBlocks[i];
+				//mudar lógica para o método de add link
 				if(ef.selectedBlock.type == "decision"){
 					if(ef.selectedBlock.havelinktome == 1){
 						ef.selectedBlock.type = "loop";
