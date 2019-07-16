@@ -1,7 +1,74 @@
 TranslateCode = function(){ }
 
 
-TranslateCode.prototype.getCommands = function(stackBlock){
+TranslateCode.prototype.getCommands = function(currentBlock, textCommands, checkedCommands, inloop, level){
+	
+    //console.log(StartBlock, checkedCommands);
+	if(currentBlock == undefined) 
+		return textCommands;
+
+	console.log(currentBlock.command)
+	if(textCommands == undefined)
+		textCommands = [];
+	
+	if(checkedCommands == undefined)
+		checkedCommands = [];
+	
+	console.log("COMANDO CHECADOS", checkedCommands, currentBlock)
+	for(var i= 0; i < checkedCommands.length; i++){	
+		if(checkedCommands[i] == currentBlock){
+			console.log("BREAKING", currentBlock);
+			return "";
+		}
+	}
+		
+
+	checkedCommands[checkedCommands.length] = currentBlock;
+	
+	
+	if((currentBlock.getType() != "decision") && (currentBlock.getType() != "loop")){
+		//guarda o tipo do comando 
+		if( (inloop != 0) && (inloop != undefined) )
+			//guarda o tipo do comando 
+			textCommands[textCommands.length-1][inloop].push(currentBlock.getType()+":"+currentBlock.command);
+		else
+			textCommands.push(currentBlock.getType()+":"+currentBlock.command);
+		
+		return this.getCommands(currentBlock.links[0], textCommands, checkedCommands, inloop);
+	
+	}else {
+		console.log("LOOPS")
+		var textCommandsDecision = [4];
+		textCommandsDecision[0] = currentBlock.getType();
+		textCommandsDecision[1] = currentBlock.command;
+		textCommandsDecision[2] = [];
+		textCommandsDecision[3] = [];
+		//cria duas ramificações para o yes e o no
+		textYes = [];
+		textNo = [];
+			
+		//se exitir comando no yes	
+		if(currentBlock.linkyes!=null){
+			textCommands.push(textCommandsDecision);
+			this.getCommands(currentBlock.linkyes, textCommands, checkedCommands, 2);
+		}
+		
+		if(currentBlock.linkno!=null){
+			    this.getCommands(currentBlock.linkno, textCommands, checkedCommands, 3);
+		}
+
+	
+		return this.getCommands(undefined, textCommands, checkedCommands);
+	}
+		
+
+	return textCommands;
+	
+}
+
+
+
+TranslateCode.prototype.getCommandsOLD = function(stackBlock){
 
 	var textCommands = [];
 	var i = 0;
@@ -83,8 +150,7 @@ TranslateCode.prototype.getCommands = function(stackBlock){
 			
 			textCommands[textCommands.length-1] = textCommandsDecision;
 		}
-		
-		
+			
 	};
 	
 	return textCommands;
