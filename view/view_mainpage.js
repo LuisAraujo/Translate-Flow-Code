@@ -45,9 +45,9 @@ const MSG_CONTAINER_ERRO = $("#container-text-msg-for-user");
 ef = new EngineFlow();
 ef.start();
 
-eftest = new EngineFlowTest();
+/*eftest = new EngineFlowTest();
 eftest.caseTestLoop();
- 
+ */
  
 window.onkeydown = function(e){
 	

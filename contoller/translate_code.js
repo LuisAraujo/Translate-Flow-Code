@@ -7,17 +7,17 @@ TranslateCode.prototype.getCommands = function(currentBlock, textCommands, check
 	if(currentBlock == undefined) 
 		return textCommands;
 
-	console.log(currentBlock.command)
+	//console.log(currentBlock.command)
 	if(textCommands == undefined)
 		textCommands = [];
 	
 	if(checkedCommands == undefined)
 		checkedCommands = [];
 	
-	console.log("COMANDO CHECADOS", checkedCommands, currentBlock)
+	//console.log("COMANDO CHECADOS", checkedCommands, currentBlock)
 	for(var i= 0; i < checkedCommands.length; i++){	
 		if(checkedCommands[i] == currentBlock){
-			console.log("BREAKING", currentBlock);
+			//console.log("BREAKING", currentBlock);
 			return "";
 		}
 	}
@@ -28,16 +28,18 @@ TranslateCode.prototype.getCommands = function(currentBlock, textCommands, check
 	
 	if((currentBlock.getType() != "decision") && (currentBlock.getType() != "loop")){
 		//guarda o tipo do comando 
+		
+		//console.log(inloop, level , textCommands.length-1);
 		if( (inloop != 0) && (inloop != undefined) )
 			//guarda o tipo do comando 
-			textCommands[textCommands.length-1][inloop].push(currentBlock.getType()+":"+currentBlock.command);
+			textCommands[level][inloop].push(currentBlock.getType()+":"+currentBlock.command);
 		else
 			textCommands.push(currentBlock.getType()+":"+currentBlock.command);
 		
-		return this.getCommands(currentBlock.links[0], textCommands, checkedCommands, inloop);
+		return this.getCommands(currentBlock.links[0], textCommands, checkedCommands, inloop, level);
 	
 	}else {
-		console.log("LOOPS")
+		//console.log("LOOPS")
 		var textCommandsDecision = [4];
 		textCommandsDecision[0] = currentBlock.getType();
 		textCommandsDecision[1] = currentBlock.command;
@@ -46,19 +48,41 @@ TranslateCode.prototype.getCommands = function(currentBlock, textCommands, check
 		//cria duas ramificações para o yes e o no
 		textYes = [];
 		textNo = [];
-			
+			var currentlevel  =0;
 		//se exitir comando no yes	
 		if(currentBlock.linkyes!=null){
-			textCommands.push(textCommandsDecision);
-			this.getCommands(currentBlock.linkyes, textCommands, checkedCommands, 2);
+			
+			if( (inloop == 0) || (inloop == undefined) ){
+				textCommands.push(textCommandsDecision);
+				var currentlevel = textCommands.length-1;
+				this.getCommands(currentBlock.linkyes, textCommands, checkedCommands, 2, currentlevel);
+			}else{
+				textCommands[level][inloop].push(textCommandsDecision);
+				currentlevel = textCommands[level][inloop].length-1;
+				this.getCommands(currentBlock.linkyes, textCommands[level][inloop], checkedCommands, 2, currentlevel);
+			}
+		
+			
+			//this.getCommands(currentBlock.linkyes, textCommands[level][inloop], checkedCommands, 2, currentlevel);
 		}
 		
 		if(currentBlock.linkno!=null){
-			    this.getCommands(currentBlock.linkno, textCommands, checkedCommands, 3);
+			
+			if( (inloop == 0) || (inloop == undefined) ){
+				
+				var currentlevel = textCommands.length-1;
+				this.getCommands(currentBlock.linkno, textCommands, checkedCommands, 3, currentlevel);
+			}else{
+				
+				currentlevel = textCommands[level][inloop].length-1;
+				this.getCommands(currentBlock.linkno, textCommands[level][inloop], checkedCommands,3, currentlevel);
+			}
+			
+		
 		}
 
 	
-		return this.getCommands(undefined, textCommands, checkedCommands);
+		return this.getCommands(undefined, textCommands, checkedCommands, 0, 0);
 	}
 		
 
@@ -114,7 +138,7 @@ TranslateCode.prototype.getCommandsOLD = function(stackBlock){
 						 tempStackBlock.splice(i, 1); 
 						}
 					}
-					console.log(command2);
+					//console.log(command2);
 					//caso tenha outra subdecisão
 					if ((command2.links != undefined) && (command2.links.length > 0 ))
 						command2 =  command2.links[0];
