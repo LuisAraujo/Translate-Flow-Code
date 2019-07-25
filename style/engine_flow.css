@@ -52,8 +52,27 @@ body{
 	background-size: 100%;
 	border-radius: 5px;
 	margin-left: 5px;
-
 }
+
+.slc-menu{
+	width: 120px;
+	height: 40px;
+	float:left;
+	border: solid 1px #aaa;
+	border-radius: 5px;
+	background: none;
+	font-size: 20px;
+	margin-left: 5px;
+	
+}
+
+.slc-menu option{
+	: none;
+}
+.slc-menu:focus{
+	outline: none;
+}
+
 
 .bt-menu:hover{
 	cursor:pointer;
@@ -87,6 +106,16 @@ body{
 
 #bt-code{
 	background-image: url("../src/images/icon-bt-code.png");
+}
+
+
+#bt-copy-code{
+	background-image: url("../src/images/icon-bt-copy-code.png");
+}
+
+
+#bt-download-code{
+	background-image: url("../src/images/icon-bt-download-code.png");
 }
 
 #container-user-menu{
@@ -210,13 +239,17 @@ body{
 	font-weight: bold;	
 	font-family: "Arial";
 }
+
+
 #container-canvas{
 	float: left;
 	width: 100%;
 	height:100%;
-	overflow: scroll;
-	
+	overflow: scroll;	
 }
+
+
+
 #canv-flow{
 	border: 1px solid #888;
 	background-color: #fff;
@@ -275,8 +308,8 @@ body{
 
 .bt-submenu-icons{
 	
-	width:40px;
-	height:40px;
+	width:60px;
+	height:60px;
 	float:left;
 	border-radius:2px;
 	border: solid 1px #11B8BC;
@@ -297,14 +330,20 @@ body{
 }
 
 #container-code{
-	width: 500px;
-	height: calc(100% - 80px);
-	margin-left: 20px;
-	margin-right: 20px;
-	border: 1px solid #888;
-	background-color: #fff;
+	width: calc( 30% - 5px);
+	height: 100%;
 	float: left;
-	
+	overflow: hide;
+	display: none;
+	padding-top: 5px;
+}
+
+#editor{
+	position: absolute;
+	top: 110px;
+	width: 100%;
+	height: calc(100% - 100px);
+	border-top: solid 3px #aaa;
 }
 
 
@@ -498,4 +537,9 @@ body{
 #container-option-format-file{
 	margin-top: 10px;
 	font-size: 30px;
+}
+
+
+#container-bt-menu-code{
+	height: 50px;
 }

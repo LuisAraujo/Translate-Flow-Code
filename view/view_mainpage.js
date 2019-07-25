@@ -13,7 +13,7 @@ const BT_NEW_CLINK = $("#bt-connect-link");
 //const BT_NEW_CBLOCK = $("#bt-connect-block");
 const BT_DEL_LINK = $("#bt-delete-link");
 const BT_DEL_BLOCK = $("#bt-delete-block");
-const BT_GERATE_CODE = $("#bt-geratecode");
+//const BT_GERATE_CODE = $("#bt-geratecode");
 const BT_UPDATE_BLOCK = $("#bt-updateblock");
 const SUB_MENU_BTICONS = $("#submenu-icons");
 const BT_ZOOM_IN = $("#bt-zoom-in");
@@ -28,6 +28,10 @@ const BT_NEW_BLOCK_CONNECT= $("#bt-new-conection");
 const BT_NEW_BLOCK_START = $("#bt-new-start");
 const BT_NEW_BLOCK_END = $("#bt-new-end");
 
+const BT_COPY_CODE = $("#bt-copy-code");
+const BT_DOWNLOAD_CODE = $("#bt-download-code");
+const SELECT_LANGUAGE_CODE = $("#slc-language");
+
 const BT_EXPORT_FILE = $('#btn-download');
 const MODAL_EXPORT_FILE = $("#modal-export-file");
 
@@ -40,15 +44,22 @@ const MSG_TEXT_ERRO = $("#text-msg-for-user");
 const MSG_TIP_ERRO = $("#tip-msg-for-user");
 const MSG_CONTAINER_ERRO = $("#container-text-msg-for-user");
 
-
-
+const CANVAS_CONTAINER = $("#container-canvas");
+const CODE_CONTAINER = $("#container-code");
+const EDITOR = $("#editor");
 ef = new EngineFlow();
 ef.start();
 
-/*eftest = new EngineFlowTest();
+eftest = new EngineFlowTest();
 eftest.caseTestLoop();
- */
+
  
+
+editor = ace.edit("editor");
+editor.setTheme("ace/theme/eclipse");
+editor.session.setMode("ace/mode/javascript");
+editor.setFontSize(22);
+
 window.onkeydown = function(e){
 	
 	if(e.key == "Control")
@@ -82,6 +93,10 @@ window.onkeydown = function(e){
 					else
 						ef.selectedBlock.updateCommand(ef.selectedBlock.getCommand() + e.key);
 				}
+				
+				
+		
+			return false;
 		}
 	}
 }
@@ -99,8 +114,20 @@ window.onresize = function(){
 
 
 BT_CODE.click(function(){
-	ef.translateCode();
+	
+	CANVAS_CONTAINER.css("width", "60%");
+	BT_ZOOM_IN.css("right", "calc( 50% )");
+	BT_ZOOM_OUT.css("right", "calc( 50% - 80px)");
+	
+	var code = ef.translateCode();
+	console.log(code);
+	editor.selectAll();
+	editor.removeLines();
+	editor.insert(code);//EDITOR.html(code);
+	CODE_CONTAINER.show();
 });
+
+
 BT_RUN.click(function(){
 	ef.runCode();
 });
@@ -139,9 +166,10 @@ BT_UPDATE_BLOCK.click(function(){
 		ef.selectedBlock.updateCommand(command);
 });
 
+/*
 BT_GERATE_CODE.click(function(){
 	ef.getCommands();	
-});
+}); */
 
 BT_NEW_BLOCK.click(function(){
 	SUB_MENU_BTICONS.show();
@@ -271,7 +299,23 @@ BT_NEW_BLOCK_CONNECT.click(function(){
 		ef.addBlock(p);
  });
 	
-	
+BT_COPY_CODE.click(function(){
+	editor.selectAll();
+	var code = editor.getCopyText();
+	var copyText = document.getElementById("textarea-to-copy");
+	copyText.value = code;
+	copyText.select();
+	document.execCommand("copy");
+	alert("Text copied to clipboard!");
+});
+
+BT_DOWNLOAD_CODE.click(function(){
+	editor.selectAll();
+	var code = editor.getCopyText();
+	var text = code;
+	var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+	saveAs(blob, "mycode.txt");
+});
 	
 function getMousePos(canvas, evt) {
 	var rect = canvas.getBoundingClientRect();
@@ -349,6 +393,7 @@ canvas.addEventListener('mousedown', function (evt) {
 			break;
 		}
 	}
+	
 	
 });
 

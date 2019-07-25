@@ -4,7 +4,7 @@ TranslateCode = function(){ }
 TranslateCode.prototype.getCommands = function(currentBlock, textCommands, checkedCommands, inloop, level){
 	
     //console.log(StartBlock, checkedCommands);
-	if(currentBlock == undefined) 
+	if( (currentBlock == undefined) || (currentBlock == null) ) 
 		return textCommands;
 
 	//console.log(currentBlock.command)
@@ -183,7 +183,10 @@ TranslateCode.prototype.getCommandsOLD = function(stackBlock){
 
 /*Traduz o comando gerado pelo getCommands  em código javascript*/
 TranslateCode.prototype.translateToCode = function(commands, language, tab){
-	//console.log(commands);
+    
+	if ( ( commands == undefined) || (commands == null)) 
+		return "function start(){ var a = 10; }";
+	
 	var code = "";
 	var currentcode;
 	

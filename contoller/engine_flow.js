@@ -72,7 +72,6 @@ EngineFlow.prototype.setDataInMenu = function(){
 
 EngineFlow.prototype.runCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock[0]);
-	//console.log(commandstranlated);
 	var code = this.translate.translateToCode(commandstranlated, "javascrip", "");
 	console.log("/*gerated code:*/ \n" + code);
 	eval(code + "\n start();");
@@ -82,7 +81,7 @@ EngineFlow.prototype.runCode = function(){
 EngineFlow.prototype.translateCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock[0]);
 	var codejs = this.translate.translateToCode(commandstranlated, "javascrip", "");
-	console.log(codejs);
+	return codejs;
 	
 }
 

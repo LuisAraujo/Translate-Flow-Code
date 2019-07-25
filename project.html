@@ -34,9 +34,9 @@
 		</div>
 	</div>
 	<div id="container-msg-menu">
-		<input id="title-project" value="Atividade numero 01 - Lista 1">
+		<input id="title-project" value="Activity n 01">
 		<span id="msg-save">
-			Todas as alteração foram salvas.
+			All changes saved in TFC.
 		</span>
 	</div>
 	<div id="container-user-menu">
@@ -74,8 +74,28 @@
 	
 		<canvas id="canv-flow"> </canvas>
 		
-		 <img src="" id="canv-mirror" class="canv-mirror"  />
+		 <img src="" id="canv-mirror" class="canv-mirror"  crossorigin />
 		 
+	</div>
+	
+	
+	<div id="container-code">
+		<div id="container-bt-menu-code">
+			<div id="bt-copy-code" class="bt-menu" title="copy code"> </div>
+			<div id="bt-download-code" class="bt-menu" title="download code"> </div>
+			<select idd="slc-language" class="slc-menu">
+				<option value="javascript">Javascript</option>
+				<option value="c">C</option>
+				<option value="java">Java</option>
+			</select>
+		</div>
+		<!-- <div style="width: 100%; height: 40px; background-color: #aaa"> </div> -->
+		<div id="editor">
+
+		 
+		</div>
+		
+		<textarea id="textarea-to-copy"></textarea>
 	</div>
 
 </div>
@@ -97,8 +117,15 @@
 
 
 <script src="src/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script> -
+
+<!--
+<script src="src/ace/ace.js" type="text/javascript" charset="utf-8">></script>
+<script src="src/ace/theme-eclipse.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/ace/mode-javascript.js" type="text/javascript" charset="utf-8"></script>  -->
 
 <script src="src/RectRounded.js"></script>
+<script src="src/FileSaver.js"></script>
 <script src="src/Util.js"></script>
 <script src="model/CButton.js"></script>
 <script src="model/Block.js"></script>
