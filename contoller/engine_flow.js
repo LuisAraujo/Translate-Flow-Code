@@ -1,6 +1,7 @@
 EngineFlow = function(){
 	this.msgerrosmanager = new MsgErroManager();
 	this.translate = new TranslateCode();	
+	this.runner = new Runner();	
 	this.debug = false;
 	this.linkingblocks = false;
 	this.selectedBlock;	
@@ -34,6 +35,7 @@ EngineFlow.prototype.start = function(){
 
 EngineFlow.prototype.addBlock = function(block){
 	block.name = "Block n"+this.stackBlock.length;
+	block.id = this.stackBlock.length;
 	this.stackBlock[this.stackBlock.length] = block;
 }
 
@@ -72,9 +74,8 @@ EngineFlow.prototype.setDataInMenu = function(){
 
 EngineFlow.prototype.runCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock[0]);
-	var code = this.translate.translateToCode(commandstranlated, "javascrip", "");
-	console.log("/*gerated code:*/ \n" + code);
-	eval(code + "\n start();");
+	this.runner.runFlow(commandstranlated);
+	
 	
 	
 }

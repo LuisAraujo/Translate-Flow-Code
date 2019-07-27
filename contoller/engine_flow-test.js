@@ -14,7 +14,7 @@ EngineFlowTest .prototype.caseTestLoop = function(){
 	s.addLink(p);
 	ef.addBlock(p);
 			
-	var d = new Decision(0,0, ctx, "a < 10" );
+	var d = new Decision(0,0, ctx, "a < 2" );
 	d.y = 200;
 	d.x = 500;
 	d.havelinktome=2;

@@ -1,4 +1,4 @@
-Block = function(x, y, ctx, command){
+Block = function(x, y, ctx, command, id){
 	/*Coord*/
 	this.x = x;
 	this.y = y;
@@ -12,8 +12,10 @@ Block = function(x, y, ctx, command){
 	this.selected = false;
 	this.double_selected = false;
 	this.moving = false;
+	this.executing = false;
 	this.links = new Array();
 	this.type= "";
+	this.id = -1;
 	
 }
 
@@ -111,6 +113,18 @@ Block.prototype.printMoving = function(){
 	this.ctx.setLineDash([0, 0]);
 }
 
+Block.prototype.printExecuting = function(){
+	this.ctx.font = "italic 15px Courier New";
+	this.ctx.fillStyle = "#4286f4";
+	this.ctx.lineWidth = "2";
+	this.ctx.strokeStyle = "#fff";
+	this.printBlock();
+	this.printText("white");
+	this.ctx.strokeStyle = "#000";
+	this.printLinks("#aa");
+	this.ctx.setLineDash([0, 0]);
+}
+
 	
 Block.prototype.click = function(x, y){
 
@@ -133,6 +147,8 @@ Block.prototype.print = function(){
 		this.printDoubleSelected();
 	}else if(this.selected){
 		this.printSelected();
+	}else if(this.executing){
+		this.printExecuting();
 	}else{
 		this.printRegular();
 	}

@@ -40,8 +40,8 @@ Decision.prototype.printBlock = function(){
 	
 }
 
-Decision.prototype.printText = function(){
-    this.ctx.fillStyle = "#0056E0";
+Decision.prototype.printText = function(color){
+    this.ctx.fillStyle = color != undefined?color:"#0056E0";
 	ctx.textAlign = "center";
 	this.ctx.fillText(this.command, this.x + this.w/2 + this.m/4, this.y + this.h/2);
 }

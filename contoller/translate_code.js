@@ -3,26 +3,24 @@ TranslateCode = function(){ }
 
 TranslateCode.prototype.getCommands = function(currentBlock, textCommands, checkedCommands, inloop, level){
 	
-    //console.log(StartBlock, checkedCommands);
+   
 	if( (currentBlock == undefined) || (currentBlock == null) ) 
 		return textCommands;
-
-	//console.log(currentBlock.command)
-	if(textCommands == undefined)
-		textCommands = [];
 	
-	if(checkedCommands == undefined)
-		checkedCommands = [];
+	//inicializando text commands
+	textCommands = textCommands==undefined?[]:textCommands;
 	
-	//console.log("COMANDO CHECADOS", checkedCommands, currentBlock)
+	//inicializando checked commands
+	checkedCommands = checkedCommands==undefined?[]:checkedCommands;
+	
+	//o comando já foi checado
 	for(var i= 0; i < checkedCommands.length; i++){	
 		if(checkedCommands[i] == currentBlock){
-			//console.log("BREAKING", currentBlock);
 			return "";
 		}
 	}
 		
-
+	//adiciona o bloco atual à lista de blocos checados
 	checkedCommands[checkedCommands.length] = currentBlock;
 	
 	
@@ -32,9 +30,9 @@ TranslateCode.prototype.getCommands = function(currentBlock, textCommands, check
 		//console.log(inloop, level , textCommands.length-1);
 		if( (inloop != 0) && (inloop != undefined) )
 			//guarda o tipo do comando 
-			textCommands[level][inloop].push(currentBlock.getType()+":"+currentBlock.command);
+			textCommands[level][inloop].push([currentBlock.getType()+":"+currentBlock.command, currentBlock.id]);
 		else
-			textCommands.push(currentBlock.getType()+":"+currentBlock.command);
+			textCommands.push([currentBlock.getType()+":"+currentBlock.command, currentBlock.id ]);
 		
 		return this.getCommands(currentBlock.links[0], textCommands, checkedCommands, inloop, level);
 	
@@ -45,10 +43,11 @@ TranslateCode.prototype.getCommands = function(currentBlock, textCommands, check
 		textCommandsDecision[1] = currentBlock.command;
 		textCommandsDecision[2] = [];
 		textCommandsDecision[3] = [];
+		textCommandsDecision[4] = currentBlock.id;
 		//cria duas ramificações para o yes e o no
 		textYes = [];
 		textNo = [];
-			var currentlevel  =0;
+		var currentlevel = 0;
 		//se exitir comando no yes	
 		if(currentBlock.linkyes!=null){
 			
@@ -192,8 +191,9 @@ TranslateCode.prototype.translateToCode = function(commands, language, tab){
 	
 	for(var i = 0; i<commands.length; i++){
 		
-		if(typeof commands[i] == "string"){
-			currentcode = commands[i].split(":");
+		//if(typeof commands[i] == "string"){
+		if(commands[i].length == 2){
+			currentcode = commands[i][0].split(":");
 			
 			if(currentcode[0] == "Start"){
 				code += tab+"function start(){";
@@ -254,5 +254,6 @@ TranslateCode.prototype.translateToCode = function(commands, language, tab){
 	
 	return code;
 }
+
 
 
