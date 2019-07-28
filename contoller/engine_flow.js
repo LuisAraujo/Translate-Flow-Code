@@ -73,12 +73,14 @@ EngineFlow.prototype.setDataInMenu = function(){
 }
 
 EngineFlow.prototype.runCode = function(){
+	MSG_RUN.show();
+	MSG_TEXT_RUN.html("");
 	var commandstranlated = this.translate.getCommands(this.stackBlock[0]);
-	this.runner.runFlow(commandstranlated);
 	
-	
-	
+	this.runner.startRunning(commandstranlated);
 }
+
+
 EngineFlow.prototype.translateCode = function(){
 	var commandstranlated = this.translate.getCommands(this.stackBlock[0]);
 	var codejs = this.translate.translateToCode(commandstranlated, "javascrip", "");

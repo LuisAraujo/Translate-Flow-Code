@@ -543,3 +543,81 @@ body{
 #container-bt-menu-code{
 	height: 50px;
 }
+
+
+
+
+#msg-for-run{
+	position: fixed;
+	bottom: 20px;
+	left: 20px; 
+	width: 400px; 
+	height: 20px;
+	background-color: #fff;	
+	color: #000;
+	border: 2px #999 solid;
+	border-radius: 10px;	
+	padding: 10px;
+	text-align: left;
+	display: none;
+}
+
+.msg-block-id{
+	float: right;
+	font-size: 13px;
+	text-decoration: underline;
+}
+
+#modal-input-values{
+	
+	font-family: Arial;
+	width: 500px;
+	min-height: 140px;
+	background-color: #fff;
+	position: absolute;
+	z-index: 999;
+	left: calc(50% - 250px);
+	top: 200px;
+	border: solid 1px #aaa;
+	border-radius: 10px;
+	padding: 10px;	
+	display: none;
+	
+}
+
+#modal-input-values .label{
+	font-size: 20px;
+	text-decoration: bold;
+	color: #333;
+}
+
+#modal-input-values input{
+	width: 100%;
+	border:none;
+	font-size: 30px;
+	outline: none;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	padding-left: 5px;
+}
+
+#btn-save-input{
+	margin-top: 10px;
+	display: block;
+	width: calc(100% - 2px);
+	height: 40px;
+	background-color: #108B93;
+	border-radius: 2px;
+	border: solid 1px #11B8BC;
+	margin-bottom: 5px;
+	background-size: contain;
+	font-size: 30px;
+	text-align: center;
+	color: #fff;
+	text-decoration: none;
+}
+
+#btn-save-input:hover{
+	background-color: #11B8BC;
+	cursor: pointer;
+}

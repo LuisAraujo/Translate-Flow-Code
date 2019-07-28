@@ -47,11 +47,21 @@ const MSG_CONTAINER_ERRO = $("#container-text-msg-for-user");
 const CANVAS_CONTAINER = $("#container-canvas");
 const CODE_CONTAINER = $("#container-code");
 const EDITOR = $("#editor");
+
+const MSG_RUN = $("#msg-for-run");
+const MSG_TEXT_RUN = $("#text-msg-for-run");
+
+const MODAL_INPUTS = $("#modal-input-values");
+const INPUTS_VALUES_CONATINER = $("#containers-inputs-values");
+const BT_SAVE_VALUES = $("#btn-save-input");
+
 ef = new EngineFlow();
 ef.start();
 
 eftest = new EngineFlowTest();
-eftest.caseTestLoop();
+//eftest.caseTestLoop();
+//eftest.caseTestOutput();
+eftest.caseTestInOutput();
 
  
 
@@ -123,13 +133,15 @@ BT_CODE.click(function(){
 	console.log(code);
 	editor.selectAll();
 	editor.removeLines();
-	editor.insert(code);//EDITOR.html(code);
+	editor.insert(code);
 	CODE_CONTAINER.show();
 });
 
 
 BT_RUN.click(function(){
+	
 	ef.runCode();
+	
 });
 
 
@@ -315,6 +327,17 @@ BT_DOWNLOAD_CODE.click(function(){
 	var text = code;
 	var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "mycode.txt");
+});
+
+BT_SAVE_VALUES.click(function(){
+	inp_values = $(".input-values");
+	ef.runner.inputlist = [];
+	for(var i = 0 ; i < inp_values.length; i++){
+		ef.runner.inputlist.push( $(inp_values[i]).val() )
+	}
+	
+	MODAL_INPUTS.hide();
+	ef.runner.runFlow();
 });
 	
 function getMousePos(canvas, evt) {
