@@ -34,8 +34,6 @@ EngineFlowTest.prototype.caseTestInOutput = function(){
 	ef.addBlock(p3);
 	p2.addLink(p3);
 
-	
-
 	var e = new StartEnd(canvas.width/2,10, ctx, "End");
 	e.y = 450
 	e.x = 450

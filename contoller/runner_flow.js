@@ -10,6 +10,7 @@ Runner = function(){
 Runner.prototype.runFlow = function(commands, id){
     
 	var input_current_index = 0;
+	var temp_code = "function temp(){";
 	
 	if(commands == undefined)
 		 commands = this.commands;
@@ -23,14 +24,19 @@ Runner.prototype.runFlow = function(commands, id){
 		if(commands[i].length == 2){
 			setTimeout(this.showExecutingBlock.bind(null,commands[i][1]) , this.timestep*id);
 			currentcode = commands[i][0].split(":");
-	
-			if(currentcode[0] == "process")
+			
+			//testar se o eval antes pode causar erro
+			if(currentcode[0] == "process"){
+				temp_code += currentcode[1] +";";
 				setTimeout( eval.bind(null, currentcode[1]), this.timestep*id);
-			else if(currentcode[0] == "input"){
+			}else if(currentcode[0] == "input"){
+				temp_code +=  currentcode[1] + " = " + this.inputlist[input_current_index++]+";"
+				//eval(currentcode[1] + " = " + this.inputlist[input_current_index++])
 				setTimeout( eval.bind(null, currentcode[1] + " = " + this.inputlist[input_current_index++]), this.timestep*id);
-			}else if(currentcode[0] == "output")
+			}else if(currentcode[0] == "output"){
+				temp_code +=  currentcode[1]+";"
 				setTimeout(  this.showMessageRun.bind(null, currentcode[1], commands[i][1]), this.timestep*id );
-			else if(currentcode[0] == "End")
+			}else if(currentcode[0] == "End")
 				setTimeout(  this.endRunning.bind(null, id) , this.timestep* (id+1) );
 					
 		}else{
@@ -39,12 +45,21 @@ Runner.prototype.runFlow = function(commands, id){
 		
 			if(commands[i][0] == "decision"){
 				//TODO: há um problema em avaliar no scopo!!!
+			var temp_code2 = temp_code + "; if(" + commands[i][1] + ") return true; else return false; }; temp()";
+				console.log(temp_code2)
+				
+				temp_code +=  commands[i][1];
+				
 				if( eval( commands[i][1] ) )
 					id = this.runFlow(commands[i][2], id);
 				else
 					id = this.runFlow(commands[i][2], id);
 
 			}else if(commands[i][0] == "loop"){
+				var temp_code2 = temp_code + "; if(" + commands[i][1] + ") return true; else return false; }; temp()";
+				console.log( eval( temp_code2) );
+				
+				temp_code +=  commands[i][1];
 				
 				if( eval(commands[i][1]) ){
 					var lastblock = this.runFlow(commands[i][2], id);
@@ -74,7 +89,7 @@ Runner.prototype.runFlow = function(commands, id){
 	
 	}
 	
-	//console.log(commands, i)
+	console.log(commands, i)
 	if(commands[i-1].length == 2)
 		return  [ id, commands[i-1][1]]
 	else

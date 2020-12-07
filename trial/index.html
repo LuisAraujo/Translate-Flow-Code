@@ -1,0 +1,162 @@
+<html>
+<head>
+ <link rel="stylesheet" href="../style/engine_flow.css">
+ <title>Translate Flow Code TRIAL</title>
+ <link rel="icon" href="../src/images/logo2.png" sizes="16x16" type="image/png"> 
+</head>
+<body>
+<div id="modal-export-file">
+	<input value="my-file-name" id ="inp-name-export-file" placeholder="File Name"/>
+
+	<div id="container-option-format-file">
+		<span>Format</span>
+		<select id="format-file-export">
+			<option value="png">PNG</option>
+			<option value="jpg">JPG</option>
+		</select>
+	</div>
+	<a href="#"  class="button" id="btn-download" download="my-file-name.jpg">Download</a>
+</div>
+
+
+<div id="modal-input-values">
+	 <div id=title-modal-input-values">Set all values for inputs, in same order! </div>
+	 <div id="containers-inputs-values">
+		 <div class="inputs"> 
+			<span class="label">input  1 </span> : <input class="input-values"></input>
+		 </div>
+		  <div class="inputs"> 
+			<span class="label">input  2 </span> : <input class="input-values"></input>
+		 </div>
+	 </div>
+	<a href="#"  class="button" id="btn-save-input">Save</a>
+
+</div>
+
+
+<div id="sup-menu">
+	<image src="src/images/logo.png" id="logo-menu">
+	<div id="container-bts-menu">
+		<div class="bt-menu" id="bt-new" title="New Flow" >
+		</div>
+		<div class="bt-menu" id="bt-open" title="Open a Flow" >
+		</div>
+		<div class="bt-menu" id="bt-export" title="Export as PNG" >
+		</div>
+		<div class="bt-menu" id="bt-run" title="Run Code" >
+		</div>
+		<div class="bt-menu" id="bt-code" title="Gerate code by FlowChart" >
+		</div>
+	</div>
+	<div id="container-msg-menu">
+		<input id="title-project" value="Activity n 01">
+		<span id="msg-save">
+			All changes saved in TFC.
+		</span>
+	</div>
+	<div id="container-user-menu">
+		<div id="name-user-menu">Usuário</div>
+		<div id="profile-user-menu">
+			
+		</div>
+	</div>
+</div>
+
+<div id="main-container">
+	
+	<div id="menu-icons" >
+		   <div id="submenu-icons" style="width: 100%" >
+				<div class="bt-submenu-icons" id="bt-new-process" title="Create a new process-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-decision" title="Create a new decision-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-input" title="Create a new input-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-output" title="Create a new output-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-conection" title="Create a new connection-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-start" title="Create a new start-block" ></div>
+				<div class="bt-submenu-icons" id="bt-new-end" title="Create a new end-block" ></div>
+			</div>	
+			
+		<div class="bt-menu-icons" id="bt-new-block" title="Create a new block" ></div>
+		<div class="bt-menu-icons" id="bt-connect-link"></div>
+		<!-- <div class="bt-menu-icons" id="bt-connect-block"></div> -->
+		<div class="bt-menu-icons" id="bt-delete-link"></div>
+		<div class="bt-menu-icons" id="bt-delete-block"></div>
+	</div>
+	
+	
+	<div id="container-canvas">
+		<div class="bt-zoom" id="bt-zoom-in"></div>
+		<div class="bt-zoom" id="bt-zoom-out"></div>
+		
+		<canvas id="canv-flow"> </canvas>
+		<img src="" id="canv-mirror" class="canv-mirror"  crossorigin />
+		 
+	</div>
+	
+	
+	<div id="container-code">
+		<div id="container-bt-menu-code">
+			<div id="bt-copy-code" class="bt-menu" title="copy code"> </div>
+			<div id="bt-download-code" class="bt-menu" title="download code"> </div>
+			<select idd="slc-language" class="slc-menu">
+				<option value="javascript">Javascript</option>
+				<option value="c">C</option>
+				<option value="java">Java</option>
+			</select>
+		</div>
+		<!-- <div style="width: 100%; height: 40px; background-color: #aaa"> </div> -->
+		<div id="editor">
+		</div>
+		
+		<textarea id="textarea-to-copy"></textarea>
+	</div>
+
+</div>
+<!--
+<div id="msg-alert">
+	Pressione <b>Ctrl</b> para mover o bloco
+</div>
+-->
+<div id="msg-for-user">
+	<div id="close-msg-for-user"></div>
+	<span id="container-text-msg-for-user">
+		<span id="text-msg-for-user">You must select a block. </span>
+		<a id="tip-msg-for-user">Get a tip</a>!
+	</span>
+</div>
+
+<div id="msg-for-run">
+	 <span id="text-msg-for-run">  </span>
+</div>
+
+
+
+
+
+<script src="../src/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script> -
+
+<!--
+<script src="src/ace/ace.js" type="text/javascript" charset="utf-8">></script>
+<script src="src/ace/theme-eclipse.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/ace/mode-javascript.js" type="text/javascript" charset="utf-8"></script>  -->
+
+<script src="../src/RectRounded.js"></script>
+<script src="../src/FileSaver.js"></script>
+<script src="../src/Util.js"></script>
+<script src="../model/CButton.js"></script>
+<script src="../model/Block.js"></script>
+<script src="../model/Conection.js"></script>
+<script src="../model/StartEnd.js"></script>
+<script src="../model/Decision.js"></script>
+<script src="../model/Process.js"></script>
+<script src="../model/InOutput.js"></script>
+<script src="../contoller/msg-error-manager.js"></script>
+<script src="../contoller/engine_flow.js"></script>
+<script src="../contoller/engine_flow-test.js"></script>
+<script src="../contoller/translate_code.js"></script>
+<script src="../contoller/runner_flow.js"></script>
+<script src="../view/view_mainpage.js"></script>
+
+</body>
+
+</html>
