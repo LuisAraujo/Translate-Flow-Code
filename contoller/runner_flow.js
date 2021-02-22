@@ -17,6 +17,9 @@ Runner.prototype.runFlow = function(commands, id){
 	
 	if(id == undefined)
 		id = 0;
+	
+	this.clearExecutingBlock(commands);
+	
 	var i = 0
 	
 	for(i = 0; i< commands.length; i++){	
@@ -35,7 +38,11 @@ Runner.prototype.runFlow = function(commands, id){
 				setTimeout( eval.bind(null, currentcode[1] + " = " + this.inputlist[input_current_index++]), this.timestep*id);
 			}else if(currentcode[0] == "output"){
 				temp_code +=  currentcode[1]+";"
-				setTimeout(  this.showMessageRun.bind(null, currentcode[1], commands[i][1]), this.timestep*id );
+				
+				temp_val = currentcode[1];
+				temp_val2 = commands[i][1];
+				setTimeout(  this.showMessageRun.bind(null, temp_val, temp_val2 ), this.timestep*id );
+			
 			}else if(currentcode[0] == "End")
 				setTimeout(  this.endRunning.bind(null, id) , this.timestep* (id+1) );
 					
@@ -56,10 +63,12 @@ Runner.prototype.runFlow = function(commands, id){
 					id = this.runFlow(commands[i][2], id);
 
 			}else if(commands[i][0] == "loop"){
-				var temp_code2 = temp_code + "; if(" + commands[i][1] + ") return true; else return false; }; temp()";
-				console.log( eval( temp_code2) );
+				var temp_code2 = temp_code + " if(" + commands[i][1] + ") return true; else return false; }; temp()";
+				
+				console.log( eval( temp_code2 ) );
 				
 				temp_code +=  commands[i][1];
+				console.log( commands[i][1]);
 				
 				if( eval(commands[i][1]) ){
 					var lastblock = this.runFlow(commands[i][2], id);
@@ -89,6 +98,8 @@ Runner.prototype.runFlow = function(commands, id){
 	
 	}
 	
+
+	
 	console.log(commands, i)
 	if(commands[i-1].length == 2)
 		return  [ id, commands[i-1][1]]
@@ -106,6 +117,16 @@ Runner.prototype.showExecutingBlock = function(id){
 		
 }
 
+
+Runner.prototype.clearExecutingBlock = function(commands){
+	for(i = 0; i< commands.length; i++){	
+		id = commands[i][4];
+		if(id > 0)
+			ef.stackBlock[id].executing = false; 
+	}
+		
+}
+
 Runner.prototype.hideExecutingBlock = function(id){
 
 	ef.stackBlock[ id ].executing = false; 
@@ -113,7 +134,11 @@ Runner.prototype.hideExecutingBlock = function(id){
 }
 
 Runner.prototype.showMessageRun = function(command, id){
-	MSG_TEXT_RUN.html(">>  " + eval( command ) + "<span class='msg-block-id'> - block id: "+ id+"</span>");
+	
+	
+	MSG_TEXT_RUN.html(">>  " + temp_val2 + "<span class='msg-block-id'> - block id: "+ id+"</span>");
+	
+	//MSG_TEXT_RUN.html(">>  " + eval( command ) + "<span class='msg-block-id'> - block id: "+ id+"</span>");
 	//console.log(  );
 }
 
